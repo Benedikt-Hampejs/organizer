@@ -12,17 +12,17 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class DayComponent implements OnInit, OnDestroy {
   events$: Observable<Event[]>;
-  day: Number;
+  day: Date;
   //events: Event[] = [];
   eventChangeSubscription: Subscription;
   
   formEvent: Event = {};
 
-  constructor(private eventService: EventService, private router: Router) {}
+  constructor(private eventService: EventService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    var url = this.router.url;
-    this.day = (Number)(url.substring(url.lastIndexOf('/')+1));
+    var dateString = this.route.snapshot.paramMap.get('id');
+    this.day = new Date(dateString);
 
     this.events$ = this.eventService.loadEvents(this.day);
     this.eventChangeSubscription = this.eventService.eventChanged$.subscribe(changedEvent => {
@@ -35,8 +35,8 @@ export class DayComponent implements OnInit, OnDestroy {
   }
 
   saveEvent(inputs: Event) {
-    this.formEvent.day = this.day;
-    this.eventService.saveEvent(this.formEvent, this.day).subscribe();
+    this.formEvent.start = this.day;
+    this.eventService.saveEvent(this.formEvent).subscribe();
     //this.events.push(inputs);
     this.formEvent = {}
   }

@@ -1,4 +1,4 @@
-<h1>Day {{day}}</h1>
+<h1>Day {{day | date:'dd.MM.yyyy'}}</h1>
 
 <!--
   Overview of all Events on this day
@@ -37,6 +37,7 @@
                 <label for="description">Description *</label>
                 <textarea [(ngModel)]="formEvent.description" required class="form-control" name="description" rows="3"></textarea>
               </div>
+              
               <span>
                 <a routerLink="/calender" class="btn btn-secondary" role="button" aria-pressed="true">Back</a>&nbsp;
                 <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Save</button>

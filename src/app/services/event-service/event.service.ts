@@ -21,14 +21,14 @@ export class EventService {
     return this.http.get<Event>(BASE_URL + id);
   }
 
-  loadEvents(day: Number): Observable<Event[]> {
+  loadEvents(day: Date): Observable<Event[]> {
     let param = new HttpParams;
-    param = param.append('day', String(day));
+    if (day != null)
+      param = param.append('day', String(day));
     return this.http.get<Event[]>(BASE_URL, {params:param});
   }
 
-
-  saveEvent(event: Event, day: Number) {
+  saveEvent(event: Event) {
      const method = event.id ? 'PUT' : 'POST';
      const id = event.id ? '/' + event.id : ''
     return this.http.request(method, BASE_URL + id, {
