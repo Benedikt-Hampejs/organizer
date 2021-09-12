@@ -1,10 +1,7 @@
 import {Event} from '../../models/Event';
 import {Injectable, Inject} from '@angular/core';
-import {Observable, BehaviorSubject, fromEvent} from 'rxjs';
+import {Observable, BehaviorSubject, fromEvent, Subject} from 'rxjs';
 import {HttpClient, HttpHeaders, HttpParams, HttpResponse} from '@angular/common/http';
-import {map} from 'rxjs/operators';
-import {LOAD, ADD, EDIT, REMOVE, EventStore} from '../../store/event.store';
-import {SOCKET_IO} from '../../app.tokens';
 import {tap} from 'rxjs/internal/operators';
 
 
@@ -13,29 +10,19 @@ const BASE_URL = 'http://localhost:3000/api/events';
 const WEB_SOCKET_URL = 'http://localhost:3001';
 @Injectable()
 export class EventService {
-
-  socket: any;
+  eventChanged$ = new Subject<Event>();
 
   events$: Observable<Event[]>;
-    eventsChanged = new BehaviorSubject({});
-    constructor(private http: HttpClient, private eventStore: EventStore,
-              @Inject(SOCKET_IO) socketIO) {
-
-    this.events$ = eventStore.items$;
-    this.socket = socketIO(WEB_SOCKET_URL);
-    fromEvent(this.socket, 'event_saved')
-      .subscribe((action) => {
-        this.eventStore.dispatch(action);
-      });
-      this.http.get(BASE_URL).pipe(
-        tap((tasks) => {
-          this.eventStore.dispatch({type: LOAD, data: tasks});
-        })).subscribe();
-  }
+    //eventsChanged = new BehaviorSubject({});
+    constructor(private http: HttpClient) {}
 
 
   getEvent(id: number | string): Observable<Event> {
     return this.http.get<Event>(BASE_URL + id);
+  }
+
+  loadEvents(): Observable<Event[]> {
+    return this.http.get<Event[]>(BASE_URL);
   }
 
 
@@ -46,17 +33,15 @@ export class EventService {
         body: event
     }).pipe(
       tap(savedEvent => {
-        this.eventsChanged.next(savedEvent);
-        const actionType = event.id ? EDIT : ADD;
-        const action = {type : actionType, data: savedEvent};
-        this.eventStore.dispatch(action);
-        this.socket.emit('broadcast_event', action);
+        this.eventChanged$.next(savedEvent)
+        //this.eventsChanged.next(savedEvent);
       }));
   }
   deleteEvent(event: Event) {
-    return this.http.delete(BASE_URL + event.id).pipe(
-      tap(_ => {
-        this.eventStore.dispatch({type: REMOVE, data: event});
+    console.log("test2 " + BASE_URL+ " "+event.id);
+    return this.http.delete(BASE_URL +"/"+ event.id).pipe(
+      tap(savedEvent => {
+        this.eventChanged$.next(savedEvent)
       }));
   }
 }
