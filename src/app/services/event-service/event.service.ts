@@ -21,12 +21,14 @@ export class EventService {
     return this.http.get<Event>(BASE_URL + id);
   }
 
-  loadEvents(): Observable<Event[]> {
-    return this.http.get<Event[]>(BASE_URL);
+  loadEvents(day: Number): Observable<Event[]> {
+    let param = new HttpParams;
+    param = param.append('day', String(day));
+    return this.http.get<Event[]>(BASE_URL, {params:param});
   }
 
 
-  saveEvent(event: Event) {
+  saveEvent(event: Event, day: Number) {
      const method = event.id ? 'PUT' : 'POST';
      const id = event.id ? '/' + event.id : ''
     return this.http.request(method, BASE_URL + id, {
@@ -38,7 +40,6 @@ export class EventService {
       }));
   }
   deleteEvent(event: Event) {
-    console.log("test2 " + BASE_URL+ " "+event.id);
     return this.http.delete(BASE_URL +"/"+ event.id).pipe(
       tap(savedEvent => {
         this.eventChanged$.next(savedEvent)
