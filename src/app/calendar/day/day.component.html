@@ -1,0 +1,42 @@
+<h1>Day</h1>
+<div class="mdc-layout-grid mdc-layout-grid--align-left demo-grid demo-grid--alignment">
+  <div class="mdc-layout-grid__inner">
+    <mat-card *ngFor="let event of events$ | async" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3">
+      <mat-card-title>
+        <h2>{{event.title}}</h2>
+        <span>
+          <button class="text-primary" (click)="setEditEvent(event)" mat-icon-button aria-label="Edit Event"><mat-icon>mode</mat-icon></button>
+          <button class="text-primary" (click)="deleteEvent(event)" mat-icon-button aria-label="Edit Event"><mat-icon>delete</mat-icon></button>
+        </span>
+      </mat-card-title>
+      <mat-card-content>{{event.description}}</mat-card-content>
+    </mat-card>
+  </div>
+</div>
+<div class="mdc-layout-grid mdc-layout-grid--align-left demo-grid demo-grid--alignment">
+  <div class="mdc-layout-grid__inner">
+    <mat-card class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+      <mat-card-title><h2>New Event</h2></mat-card-title>
+      <mat-card-content>
+        <form novalidate #form="ngForm" (ngSubmit)="saveEvent(form.value)">
+            <div class="form-group">
+                <label for="title">Title *</label>
+                <input [(ngModel)]="formEvent.title" required type="text" class="form-control" name="title" placeholder="Enter new event name">
+              </div>
+              <div class="form-group">
+                <label for="description">Description *</label>
+                <textarea [(ngModel)]="formEvent.description" required class="form-control" name="description" rows="3"></textarea>
+              </div>
+              <span>
+                <a routerLink="/calender" class="btn btn-secondary" role="button" aria-pressed="true">Back</a>&nbsp;
+                <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Save</button>
+              </span>
+        </form>
+      </mat-card-content>
+      <mat-card-footer class="text-muted">
+        * kennzeichnet Pflichtfelder 
+      </mat-card-footer>
+    </mat-card>
+  </div>
+</div>
+

@@ -1,0 +1,16 @@
+<div class="tabs">
+  <ul>
+    <li *ngFor="let tab of tabs"
+         (click)="activate(tab)">
+      <a>{{tab.title}}</a>
+      <div class="tab-line"
+           [@tabState]="tab.active ? 'active' : 'inactive'"
+           (@tabState.start)="animationStarted($event)"
+           (@tabState.done)="animationEnded($event)"
+      ></div>
+    </li>
+  </ul>
+  <div class="tabs-container">
+      <ng-content></ng-content>
+  </div>
+</div>

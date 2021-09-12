@@ -1,0 +1,34 @@
+mat-sidenav-content {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+
+    main {
+      position: relative;
+      top: 20px;
+      left: 30px;
+      ::ng-deep & router-outlet + *{
+        position: fixed;
+        left: 220px;
+        height: 100%;
+        max-width: 1200px;
+        width: calc(100% - 250px);
+      }
+    }
+  }
+  
+  mat-sidenav-container {
+    display: flex;
+    position: absolute;
+    top: 62px;
+    left: 0;
+    right: 0;
+  }
+  
+  mat-sidenav{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 200px;
+  }
+  

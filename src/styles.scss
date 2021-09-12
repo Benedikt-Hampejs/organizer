@@ -1,0 +1,31 @@
+/* You can add global styles to this file, and also import other style files */
+
+$gray-100: #f8f9fa;
+$gray-600: #868e96;
+$gray-800: #343a40;
+
+$red: #dc3545;
+$yellow: #ffc107;
+$prmiary: #3f51b5; // This is the only variable I wanted to change
+$cyan: #17a2b8;
+
+$theme-colors: (
+  primary: $prmiary,
+  secondary: $gray-600,
+  success: $prmiary,
+  info: $cyan,
+  warning: $yellow,
+  danger: $red,
+  light: $gray-100,
+  dark: $gray-800
+);
+mat-icon:hover {
+  color: $prmiary !important;
+}
+
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
+@import "~@material/layout-grid/mdc-layout-grid";
+body {
+  background-color: #f5f5f5;;
+}
