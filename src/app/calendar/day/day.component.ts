@@ -1,9 +1,10 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import {Event} from 'src/app/models/Event';
 import {HttpClient} from '@angular/common/http'
 import {EventService} from '../../services/event-service/event.service';
 import { Observable, Subscriber, Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
+import { calculatePriortyByDay } from '../../helper'
 
 @Component({
   selector: 'app-day',
@@ -13,6 +14,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class DayComponent implements OnInit, OnDestroy {
   events$: Observable<Event[]>;
   day: Date;
+  highestPriority: number = null;
   //events: Event[] = [];
   eventChangeSubscription: Subscription;
   
@@ -23,12 +25,22 @@ export class DayComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     var dateString = this.route.snapshot.paramMap.get('id');
     this.day = new Date(dateString);
-
+    console.log(dateString);
     this.events$ = this.eventService.loadEvents(this.day);
+    this.events$.subscribe(e => {
+      e.sort((a,b) => a.priroty - b.priroty);
+      if(e.length > 0) {
+        this.highestPriority = e[e.length -1].priroty;
+      }
+      console.log("priority " + this.highestPriority);
+    });
     this.eventChangeSubscription = this.eventService.eventChanged$.subscribe(changedEvent => {
       this.events$ = this.eventService.loadEvents(this.day);
+      console.log(changedEvent.id);
     })
   }
+
+
 
   ngOnDestroy(): void {
     this.eventChangeSubscription.unsubscribe();
@@ -36,6 +48,13 @@ export class DayComponent implements OnInit, OnDestroy {
 
   saveEvent(inputs: Event) {
     this.formEvent.start = this.day;
+    this.formEvent.done = false;
+    this.calculatePriority();
+    this.formEvent.priroty = this.highestPriority;
+
+
+
+    console.log(this.day.getDay(), this.highestPriority);
     this.eventService.saveEvent(this.formEvent).subscribe();
     //this.events.push(inputs);
     this.formEvent = {}
@@ -48,5 +67,15 @@ export class DayComponent implements OnInit, OnDestroy {
   deleteEvent(input: Event) {
     this.eventService.deleteEvent(input).subscribe();
   }
+
+  calculatePriority() {
+    if(this.highestPriority == null) {
+      this.highestPriority = calculatePriortyByDay(this.day) + 1;
+    } else {
+      this.highestPriority++;
+    }
+  }
+  
+
   
 }

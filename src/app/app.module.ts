@@ -13,6 +13,8 @@ import { MatListModule } from '@angular/material/list';
 import { MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatCardModule} from '@angular/material/card'; 
 import {FormsModule} from '@angular/forms'
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { DatePipe } from '@angular/common';
 
 
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -24,13 +26,6 @@ import { TabsComponent, TabComponent} from './tabs/tabs.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { EventService } from './services/event-service/event.service';
 import { HttpClientModule} from '@angular/common/http'
-import {SOCKET_IO} from './app.tokens';
-
-import * as io from 'socket.io-client';
-
-export function socketIoFactory() {
-  return io;
-}
 
 
 
@@ -41,10 +36,11 @@ export function socketIoFactory() {
     DashboardComponent,
     TodoComponent,
     TabsComponent,
-    TabComponent
+    TabComponent,
   ],
   imports: [
     appRouting,
+    DragDropModule,
     FormsModule,
     FlexLayoutModule,
     BrowserModule,
@@ -60,10 +56,7 @@ export function socketIoFactory() {
     HttpClientModule,
     CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory })
   ],
-  providers: [EventService,
-    {provide: SOCKET_IO, useFactory: socketIoFactory},
-
-  ],
+  providers: [EventService, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

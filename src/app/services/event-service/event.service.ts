@@ -3,18 +3,18 @@ import {Injectable, Inject} from '@angular/core';
 import {Observable, BehaviorSubject, fromEvent, Subject} from 'rxjs';
 import {HttpClient, HttpHeaders, HttpParams, HttpResponse} from '@angular/common/http';
 import {tap} from 'rxjs/internal/operators';
+import {DatePipe} from '@angular/common'
 
 
 
 const BASE_URL = 'http://localhost:3000/api/events';
-const WEB_SOCKET_URL = 'http://localhost:3001';
 @Injectable()
 export class EventService {
   eventChanged$ = new Subject<Event>();
 
   events$: Observable<Event[]>;
     //eventsChanged = new BehaviorSubject({});
-    constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient, private datePipe: DatePipe) {}
 
 
   getEvent(id: number | string): Observable<Event> {
@@ -23,8 +23,9 @@ export class EventService {
 
   loadEvents(day: Date): Observable<Event[]> {
     let param = new HttpParams;
-    if (day != null)
-      param = param.append('day', String(day));
+    if (day != null) {
+      param = param.append('start', this.datePipe.transform(day, 'yyyy-MM-dd') + 'T00:00:00.000Z');
+    }
     return this.http.get<Event[]>(BASE_URL, {params:param});
   }
 
