@@ -17,10 +17,9 @@ export class CalendarComponent implements OnInit{
   view: CalendarView = CalendarView.Month;
 
   viewDate: Date = new Date();
-  events: Event[] = [{start:new Date(), title:"test"}];
+  events: Event[] = [];
   constructor(private eventService: EventService){}
   ngOnInit(): void {
-    this.events = [...this.events,{start:new Date(), title:"test"}]    
     this.eventService.loadEvents(null).subscribe(res => {
       res.forEach(x => {
         var ev: Event = {
