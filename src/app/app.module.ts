@@ -17,7 +17,7 @@ import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
-import {FormsModule} from '@angular/forms'
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { DatePipe } from '@angular/common';
 
@@ -47,6 +47,7 @@ import { HttpClientModule} from '@angular/common/http'
     appRouting,
     DragDropModule,
     FormsModule,
+    ReactiveFormsModule,
     FlexLayoutModule,
     BrowserModule,
     BrowserAnimationsModule,
