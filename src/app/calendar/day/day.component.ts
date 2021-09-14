@@ -51,7 +51,7 @@ export class DayComponent implements OnInit, OnDestroy {
   }
 
   saveEvent(inputs: Event) {
-    this.formEvent.start = this.day;
+    this.formEvent.start = this.date.value;
     this.formEvent.done = false;
     this.calculatePriority();
     this.formEvent.priroty = this.highestPriority;
@@ -62,6 +62,7 @@ export class DayComponent implements OnInit, OnDestroy {
     this.eventService.saveEvent(this.formEvent).subscribe();
     //this.events.push(inputs);
     this.formEvent = {}
+    this.date = new FormControl(this.day);
   }
 
   setEditEvent(inputs: Event) {
@@ -79,7 +80,4 @@ export class DayComponent implements OnInit, OnDestroy {
       this.highestPriority++;
     }
   }
-  
-
-  
 }
