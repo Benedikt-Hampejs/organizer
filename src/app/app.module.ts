@@ -13,7 +13,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatButtonToggleModule} from '@angular/material/button-toggle';
 import { MatCardModule } from '@angular/material/card'; 
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
+import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
@@ -65,7 +65,10 @@ import { HttpClientModule} from '@angular/common/http'
     HttpClientModule,
     CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory })
   ],
-  providers: [EventService, DatePipe],
+  providers: [EventService, DatePipe,
+    {provide: MAT_DATE_LOCALE, useValue: 'de-DE'},
+    
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
