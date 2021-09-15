@@ -11,8 +11,14 @@ import { MatButtonModule } from '@angular/material/button'
 import { MatSidenavModule} from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatButtonToggleModule} from '@angular/material/button-toggle';
-import {MatCardModule} from '@angular/material/card'; 
-import {FormsModule} from '@angular/forms'
+import { MatCardModule } from '@angular/material/card'; 
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatMomentDateModule, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
+
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { DatePipe } from '@angular/common';
 
@@ -42,6 +48,7 @@ import { HttpClientModule} from '@angular/common/http'
     appRouting,
     DragDropModule,
     FormsModule,
+    ReactiveFormsModule,
     FlexLayoutModule,
     BrowserModule,
     BrowserAnimationsModule,
@@ -52,11 +59,19 @@ import { HttpClientModule} from '@angular/common/http'
     MatButtonToggleModule,
     MatSidenavModule,
     MatListModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatFormFieldModule,
+    MatInputModule,
     NgbModule,
     HttpClientModule,
+    MatMomentDateModule,
     CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory })
   ],
-  providers: [EventService, DatePipe],
+  providers: [EventService, DatePipe,
+    {provide: MAT_DATE_LOCALE, useValue: 'de-DE'},
+    {provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: {useUtc: true}}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

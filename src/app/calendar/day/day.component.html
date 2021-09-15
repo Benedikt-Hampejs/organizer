@@ -37,7 +37,14 @@
                 <label for="description">Description *</label>
                 <textarea [(ngModel)]="formEvent.description" required class="form-control" name="description" rows="3"></textarea>
               </div>
-              
+              <div class="form-group">
+                <label for="description">Date</label>
+                <div>
+                  <input matInput [matDatepicker]="picker1" [formControl]="date" disabled>
+                  <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                  <mat-datepicker #picker1 disabled="false"></mat-datepicker>
+                </div>
+            </div>
               <span>
                 <a routerLink="/calender" class="btn btn-secondary" role="button" aria-pressed="true">Back</a>&nbsp;
                 <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Save</button>
@@ -50,4 +57,7 @@
     </mat-card>
   </div>
 </div>
+
+   
+
 
