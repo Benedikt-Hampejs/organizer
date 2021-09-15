@@ -81,11 +81,8 @@ export class TodoComponent implements OnInit {
                         event.currentIndex);
       const currentItem: Event = event.container.data[event.currentIndex];
       this.updateDone(event, currentItem);
-      if (event.container.data == this.todo) {
-        currentItem.end = null
-      } else {
-        currentItem.end = new Date();
-      }
+      this.eventService.updateEventDone(currentItem);
+
     }
     event.container.data.forEach(e => {
       e.priroty = calculatePriortyByDay(new Date()) + event.container.data.indexOf(e);

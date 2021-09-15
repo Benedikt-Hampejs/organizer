@@ -4,17 +4,19 @@
       "title": "fdas",
       "description": "gfsdgfds",
       "start": "2021-09-01T00:00:00.000Z",
-      "done": false,
-      "priroty": 2021081302,
-      "id": 1
+      "done": true,
+      "priroty": 2021081501,
+      "id": 1,
+      "end": "2021-09-15T15:32:32.702Z"
     },
     {
       "title": "trsd",
       "description": "gfds",
       "start": "2021-09-13T00:00:00.000Z",
-      "done": false,
-      "priroty": 2021081305,
-      "id": 3
+      "done": true,
+      "priroty": 2021081503,
+      "id": 3,
+      "end": "2021-09-15T15:32:33.250Z"
     },
     {
       "title": "gfdsgfds",
@@ -29,9 +31,10 @@
       "title": "gfd",
       "description": "gfsd",
       "start": "2021-09-13T00:00:00.000Z",
-      "done": false,
-      "priroty": 2021081304,
-      "id": 5
+      "done": true,
+      "priroty": 2021081504,
+      "id": 5,
+      "end": "2021-09-15T15:32:33.700Z"
     },
     {
       "title": "day7",
@@ -47,7 +50,7 @@
       "description": "ztrezrte",
       "start": "2021-09-06T00:00:00.000Z",
       "done": false,
-      "priroty": 2021081303,
+      "priroty": 2021081501,
       "id": 7
     },
     {
@@ -62,9 +65,10 @@
       "title": "tag 14",
       "description": "fjdasköl",
       "start": "2021-09-14T00:00:00.000Z",
-      "done": false,
-      "priroty": 2021081401,
-      "id": 9
+      "done": true,
+      "priroty": 2021081505,
+      "id": 9,
+      "end": "2021-09-15T15:32:37.500Z"
     },
     {
       "title": "tag  13",
@@ -79,25 +83,26 @@
       "title": "Tag 12",
       "description": "fdasfsd",
       "start": "2021-09-12T00:00:00.000Z",
-      "done": false,
-      "priroty": 2021081306,
+      "done": true,
+      "priroty": 2021081502,
       "id": 11,
-      "end": null
+      "end": "2021-09-15T15:32:38.404Z"
     },
     {
       "title": "Tag 15",
       "description": "gfdasgf",
       "start": "2021-09-15T00:00:00.000Z",
-      "done": false,
-      "priroty": 2021081501,
-      "id": 12
+      "done": true,
+      "priroty": 2021081500,
+      "id": 12,
+      "end": "2021-09-15T15:31:52.168Z"
     },
     {
       "title": "sfgd",
       "description": "sdfg",
       "start": "2021-09-14T00:00:00.000Z",
       "done": false,
-      "priroty": 2021081402,
+      "priroty": 2021081506,
       "id": 13
     },
     {
@@ -121,16 +126,36 @@
       "description": "gdf",
       "start": "2021-09-15T00:00:00.000Z",
       "done": false,
-      "priroty": 2021081405,
-      "id": 16
+      "priroty": 2021081508,
+      "id": 16,
+      "end": null
     },
     {
       "title": "jhgfdjhg",
       "description": "gfd",
       "start": "2021-09-15T00:00:00.000Z",
-      "done": false,
-      "priroty": 2021081404,
-      "id": 17
+      "done": true,
+      "priroty": 2021081506,
+      "id": 17,
+      "end": "2021-09-15T15:32:34.167Z"
+    },
+    {
+      "title": "fdsfdsa",
+      "description": "fdsa",
+      "start": "2021-09-15T00:00:00.000Z",
+      "done": true,
+      "priroty": 2021081507,
+      "id": 18,
+      "end": "2021-09-15T15:31:59.249Z"
+    },
+    {
+      "title": "fsd",
+      "description": "fds",
+      "start": "2021-09-15T00:00:00.000Z",
+      "done": true,
+      "priroty": 2021081508,
+      "id": 19,
+      "end": "2021-09-15T15:31:57.866Z"
     }
   ]
 }

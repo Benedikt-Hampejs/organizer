@@ -68,6 +68,11 @@ export class DayComponent implements OnInit, OnDestroy {
   setEditEvent(inputs: Event) {
     this.formEvent = inputs;
   }
+  changeStatusEvent(inputs: Event) {
+    inputs.done = !inputs.done;
+    this.eventService.updateEventDone(inputs);
+    this.eventService.saveEvent(inputs).subscribe();
+  }
 
   deleteEvent(input: Event) {
     this.eventService.deleteEvent(input).subscribe();
