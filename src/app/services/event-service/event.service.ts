@@ -1,9 +1,9 @@
-import {Event} from '../../models/Event';
-import {Injectable, Inject} from '@angular/core';
-import {Observable, BehaviorSubject, fromEvent, Subject} from 'rxjs';
-import {HttpClient, HttpHeaders, HttpParams, HttpResponse} from '@angular/common/http';
-import {map, tap} from 'rxjs/internal/operators';
-import {DatePipe} from '@angular/common'
+import { Event } from '../../models/Event';
+import { Injectable, Inject } from '@angular/core';
+import { Observable, BehaviorSubject, fromEvent, Subject } from 'rxjs';
+import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
+import { map, tap } from 'rxjs/internal/operators';
+import { DatePipe } from '@angular/common'
 
 
 
@@ -13,8 +13,8 @@ export class EventService {
   eventChanged$ = new Subject<Event>();
 
   events$: Observable<Event[]>;
-    //eventsChanged = new BehaviorSubject({});
-    constructor(private http: HttpClient, private datePipe: DatePipe) {}
+  //eventsChanged = new BehaviorSubject({});
+  constructor(private http: HttpClient, private datePipe: DatePipe) { }
 
 
   getEvent(id: number | string): Observable<Event> {
@@ -26,19 +26,20 @@ export class EventService {
     if (day != null) {
       param = param.append('start', this.datePipe.transform(day, 'yyyy-MM-dd') + 'T00:00:00.000Z');
     }
-    return this.http.get<Event[]>(BASE_URL, {params:param}).pipe(map(events => events.sort((e1, e2) => {
-    if(e1.done == e2.done) {
-      return 0;
-    } else {
-      return e2.done ? -1 : 1;
-    }})));
+    return this.http.get<Event[]>(BASE_URL, { params: param }).pipe(map(events => events.sort((e1, e2) => {
+      if (e1.done == e2.done) {
+        return 0;
+      } else {
+        return e2.done ? -1 : 1;
+      }
+    })));
   }
 
   saveEvent(event: Event) {
-     const method = event.id ? 'PUT' : 'POST';
-     const id = event.id ? event.id : ''
+    const method = event.id ? 'PUT' : 'POST';
+    const id = event.id ? event.id : ''
     return this.http.request(method, BASE_URL + id, {
-        body: event
+      body: event
     }).pipe(
       tap(savedEvent => {
         this.eventChanged$.next(savedEvent)
@@ -59,5 +60,5 @@ export class EventService {
       event.end = null;
     }
   }
-  
+
 }

@@ -31,8 +31,12 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { TabsComponent, TabComponent} from './tabs/tabs.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { EventService } from './services/event-service/event.service';
+import { CategoryService } from './services/category-service/category.service';
 import { HttpClientModule} from '@angular/common/http';
-import { EventDetailComponent } from './event-detail/event-detail.component'
+import { EventDetailComponent } from './event-detail/event-detail.component';
+import { CategoryComponent } from './category/category.component';
+
+import { ColorPickerModule } from 'ngx-color-picker';
 
 
 
@@ -45,6 +49,7 @@ import { EventDetailComponent } from './event-detail/event-detail.component'
     TabsComponent,
     TabComponent,
     EventDetailComponent,
+    CategoryComponent,
   ],
   imports: [
     appRouting,
@@ -68,9 +73,10 @@ import { EventDetailComponent } from './event-detail/event-detail.component'
     NgbModule,
     HttpClientModule,
     MatMomentDateModule,
-    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory })
+    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
+    ColorPickerModule
   ],
-  providers: [EventService, DatePipe,
+  providers: [EventService, CategoryService, DatePipe,
     {provide: MAT_DATE_LOCALE, useValue: 'de-DE'},
     {provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: {useUtc: true}}
   ],

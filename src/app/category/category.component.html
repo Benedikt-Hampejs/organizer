@@ -1,0 +1,29 @@
+<div class="mdc-layout-grid mdc-layout-grid--align-left demo-grid demo-grid--alignment">
+    <div class="mdc-layout-grid__inner">
+        <mat-card class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+            <mat-card-title>
+                <h2>New Category</h2>
+            </mat-card-title>
+            <mat-card-content>
+                <form novalidate #form="ngForm" (ngSubmit)="saveCategory()">
+                    <div class="form-group">
+                        <label for="category">Category *</label>
+                        <input [(ngModel)]="formCategory.category" required type="text" class="form-control" name="category"
+                          placeholder="Enter new category" style="width: 300px"/>
+                      </div>
+                      <div class="form-group">
+                        <label for="color" style="display: block;">Color *</label>
+                        <input [(ngModel)]="formCategory.color" required class="form-control" name="color" style="width: 257px; display: inline-block; margin-right: 5px;"/>
+                        <input [(colorPicker)]="formCategory.color" [style.background]="formCategory.color" style="width: 38px; height: 38px; position: relative; bottom: 1px;"/>
+                      </div>
+                    <span>
+                        <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Save</button>
+                    </span>
+                </form>
+            </mat-card-content>
+            <mat-card-footer class="text-muted">
+                * kennzeichnet Pflichtfelder
+            </mat-card-footer>
+        </mat-card>
+    </div>
+</div>

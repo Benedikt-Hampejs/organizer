@@ -1,3 +1,5 @@
+import { Category } from "./Category";
+
 export interface Event {
   id?: number;
   title?: string;
@@ -6,4 +8,5 @@ export interface Event {
   description?: string;
   done?: boolean;
   priroty?: number;
+  category?: Category;
 }
