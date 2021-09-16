@@ -1,0 +1,7 @@
+<div class="wrapper">
+    <h2>Schnellansicht</h2>
+    <div><h3>Titel</h3> <p>{{event?.title}}</p></div>
+    <div><h3>Beschreibung</h3> <p>{{event?.description}}</p></div>
+    <div><h3>Datum</h3>{{event?.start | date:'dd.MM.yyyy'}}</div>
+</div>
+<a routerLink="/calender/day/{{event?.start | date:'yyyy-MM-dd'}}/{{event?.id}}">Event Bearbeiten</a>

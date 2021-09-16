@@ -31,7 +31,8 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { TabsComponent, TabComponent} from './tabs/tabs.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { EventService } from './services/event-service/event.service';
-import { HttpClientModule} from '@angular/common/http'
+import { HttpClientModule} from '@angular/common/http';
+import { EventDetailComponent } from './event-detail/event-detail.component'
 
 
 
@@ -43,6 +44,7 @@ import { HttpClientModule} from '@angular/common/http'
     TodoComponent,
     TabsComponent,
     TabComponent,
+    EventDetailComponent,
   ],
   imports: [
     appRouting,

@@ -7,7 +7,7 @@ import {DatePipe} from '@angular/common'
 
 
 
-const BASE_URL = 'http://localhost:3000/api/events';
+const BASE_URL = 'http://localhost:3000/api/events/';
 @Injectable()
 export class EventService {
   eventChanged$ = new Subject<Event>();
@@ -36,7 +36,7 @@ export class EventService {
 
   saveEvent(event: Event) {
      const method = event.id ? 'PUT' : 'POST';
-     const id = event.id ? '/' + event.id : ''
+     const id = event.id ? event.id : ''
     return this.http.request(method, BASE_URL + id, {
         body: event
     }).pipe(
@@ -46,7 +46,7 @@ export class EventService {
       }));
   }
   deleteEvent(event: Event) {
-    return this.http.delete(BASE_URL +"/"+ event.id).pipe(
+    return this.http.delete(BASE_URL + event.id).pipe(
       tap(savedEvent => {
         this.eventChanged$.next(savedEvent)
       }));

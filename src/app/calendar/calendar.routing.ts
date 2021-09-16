@@ -7,7 +7,8 @@ export const calendarRoutes: Routes = [
     path: '',
     children: [
         {path: '', component: CalendarComponent, data: {animation: 'left'}},
-        {path: 'day/:id', component: DayComponent, data: {animation: 'right'}}
+        {path: 'day/:id', component: DayComponent, data: {animation: 'right'}},
+        {path: 'day/:id/:event', component: DayComponent}
     ]
   }
 ];

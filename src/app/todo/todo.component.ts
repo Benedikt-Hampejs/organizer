@@ -4,6 +4,7 @@ import {EventService} from '../services/event-service/event.service';
 import { Observable } from 'rxjs';
 import {Event} from 'src/app/models/Event';
 import { calculatePriortyByDay } from '../helper'
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 
@@ -26,7 +27,7 @@ export class TodoComponent implements OnInit {
   ];
 
 
-  constructor(private eventService: EventService) { }
+  constructor(private eventService: EventService, private router: Router, private activeRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.events$ = this.eventService.loadEvents(null);
@@ -47,6 +48,7 @@ export class TodoComponent implements OnInit {
         
     })});
 
+    this.activeRoute.params.subscribe((params) =>  {console.log(params)});
   }
 
   
@@ -90,8 +92,18 @@ export class TodoComponent implements OnInit {
     });
   }
 
-
   private updateDone(event: CdkDragDrop<Event[], Event[]>, currentItem:Event) {
     currentItem.done = !currentItem.done;
+  }
+
+  showEvent(event: Event) {
+    const url = this.router.url;
+    const foundParam: boolean = url.lastIndexOf('event-detail') != -1
+    const id:number = foundParam ? +url.substring(url.lastIndexOf('event-detail/') + 13, url.lastIndexOf(')')) : null;
+    if(!this.router.url.includes('event-detail') || id !== event.id) {
+      this.router.navigate([{outlets: {'right':['event-detail', event.id], }}])
+    } else{
+      this.router.navigate([{outlets: {'right': null}}])
+    }
   }
 }

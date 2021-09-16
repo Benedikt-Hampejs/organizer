@@ -27,9 +27,13 @@ export class DayComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     var dateString = this.route.snapshot.paramMap.get('id');
+    var eventId = this.route.snapshot.paramMap.get('event');
     this.day = new Date(dateString);
     this.date = new FormControl(this.day);
-    console.log(dateString);
+    if(eventId != null) {
+      console.log(eventId);
+      this.eventService.getEvent(eventId).subscribe(e => this.formEvent = e);
+    }
     this.events$ = this.eventService.loadEvents(this.day);
     this.events$.subscribe(e => {
       e.sort((a,b) => a.priroty - b.priroty);
