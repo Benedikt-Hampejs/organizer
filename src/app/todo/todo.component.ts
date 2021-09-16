@@ -17,7 +17,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class TodoComponent implements OnInit {
 
   events$: Observable<Event[]>;
-
+  showEventDetail:boolean = false;
+  clickedEvent: Event;
   todo:Event[] = [
 
   ];
@@ -97,13 +98,14 @@ export class TodoComponent implements OnInit {
   }
 
   showEvent(event: Event) {
-    const url = this.router.url;
-    const foundParam: boolean = url.lastIndexOf('event-detail') != -1
-    const id:number = foundParam ? +url.substring(url.lastIndexOf('event-detail/') + 13, url.lastIndexOf(')')) : null;
-    if(!this.router.url.includes('event-detail') || id !== event.id) {
-      this.router.navigate([{outlets: {'right':['event-detail', event.id], }}])
+    if(!this.showEventDetail || this.clickedEvent.id !== event.id) {
+      this.showEventDetail = true;
+      console.log("show");
     } else{
-      this.router.navigate([{outlets: {'right': null}}])
+      this.showEventDetail = false;
+      console.log("hide");
+
     }
+    this.clickedEvent = event;
   }
 }
