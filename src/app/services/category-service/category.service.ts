@@ -11,12 +11,12 @@ export class CategoryService {
 
   constructor(private http: HttpClient) { }
 
-  getCategory(id: number | string): Observable<Event> {
-    return this.http.get<Event>(BASE_URL + id);
+  getCategory(id: number | string): Observable<Category> {
+    return this.http.get<Category>(BASE_URL + id);
   }
 
-  loadCategory(): Observable<Event[]> {
-    return this.http.get<Event[]>(BASE_URL);
+  loadCategory(): Observable<Category[]> {
+    return this.http.get<Category[]>(BASE_URL);
   }
 
   saveCategory(category: Category) {
@@ -24,8 +24,8 @@ export class CategoryService {
     const id = category.id ? category.id : ''
     return this.http.request(method, BASE_URL + id, {
       body: category
-    }).pipe(tap(savedEvent => {
-      this.categoryChanged$.next(savedEvent);
+    }).pipe(tap(savedCategory => {
+      this.categoryChanged$.next(savedCategory);
     }));
   }
 }

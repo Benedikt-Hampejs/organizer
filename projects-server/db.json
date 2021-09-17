@@ -5,7 +5,7 @@
       "description": "gfsdgfds",
       "start": "2021-09-01T00:00:00.000Z",
       "done": true,
-      "priroty": 2021081602,
+      "priroty": 2021081702,
       "id": 1,
       "end": "2021-09-16T14:37:03.233Z"
     },
@@ -23,7 +23,7 @@
       "description": "ztrezrte",
       "start": "2021-09-06T00:00:00.000Z",
       "done": false,
-      "priroty": 2021081600,
+      "priroty": 2021081700,
       "id": 7
     },
     {
@@ -38,25 +38,26 @@
       "title": "tag 14",
       "description": "fjdasköl",
       "start": "2021-09-14T00:00:00.000Z",
-      "done": false,
-      "priroty": 2021081604,
-      "id": 9
+      "done": true,
+      "priroty": 2021081700,
+      "id": 9,
+      "end": "2021-09-17T18:05:22.689Z"
     },
     {
       "title": "Tag 12",
       "description": "fdasfsd",
       "start": "2021-09-12T00:00:00.000Z",
-      "done": false,
-      "priroty": 2021081603,
+      "done": true,
+      "priroty": 2021081701,
       "id": 11,
-      "end": null
+      "end": "2021-09-17T18:05:23.573Z"
     },
     {
       "title": "Tag 15",
       "description": "gfdasgf",
       "start": "2021-09-15T00:00:00.000Z",
       "done": false,
-      "priroty": 2021081607,
+      "priroty": 2021081705,
       "id": 12
     },
     {
@@ -64,7 +65,7 @@
       "description": "sdfg",
       "start": "2021-09-14T00:00:00.000Z",
       "done": false,
-      "priroty": 2021081605,
+      "priroty": 2021081703,
       "id": 13
     },
     {
@@ -95,11 +96,35 @@
       "title": "asdf",
       "description": "asdf",
       "start": null,
+      "done": true,
+      "priroty": 2021081703,
+      "id": 17,
+      "end": "2021-09-17T18:05:24.424Z"
+    },
+    {
+      "description": "asdf",
+      "title": "adsf",
+      "start": "2021-09-11T00:00:00.000Z",
       "done": false,
-      "priroty": 2021081606,
-      "id": 17
+      "priroty": 2021080501,
+      "id": 18
     }
   ],
   "categories": [
+    {
+      "category": "Master",
+      "color": "#9b5757",
+      "id": 1
+    },
+    {
+      "category": "Master - First",
+      "color": "#4d4646",
+      "id": 2
+    },
+    {
+      "category": "Benschi",
+      "color": "#354eba",
+      "id": 3
+    }
   ]
 }

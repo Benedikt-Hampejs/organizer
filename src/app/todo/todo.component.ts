@@ -5,6 +5,9 @@ import { Observable } from 'rxjs';
 import {Event} from 'src/app/models/Event';
 import { calculatePriortyByDay } from '../helper'
 import { ActivatedRoute, Router } from '@angular/router';
+import { CategoryComponent } from '../category/category.component';
+import { CategoryService } from '../services/category-service/category.service';
+import { Category } from '../models/Category';
 
 
 
@@ -17,6 +20,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class TodoComponent implements OnInit {
 
   events$: Observable<Event[]>;
+  
   showEventDetail:boolean = false;
   clickedEvent: Event;
   todo:Event[] = [
@@ -28,9 +32,10 @@ export class TodoComponent implements OnInit {
   ];
 
 
-  constructor(private eventService: EventService, private router: Router, private activeRoute: ActivatedRoute) { }
+  constructor(private eventService: EventService, private activeRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
+    
     this.events$ = this.eventService.loadEvents(null);
     this.events$.subscribe(res => {
       res.sort((a,b) => a.priroty - b.priroty);

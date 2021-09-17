@@ -7,6 +7,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { calculatePriortyByDay } from '../../helper'
 import { FormControl } from '@angular/forms';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { CategoryService } from 'src/app/services/category-service/category.service';
+import { Category } from 'src/app/models/Category';
 
 @Component({
   selector: 'app-day',
@@ -15,6 +17,7 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 })
 export class DayComponent implements OnInit, OnDestroy {
   events$: Observable<Event[]>;
+  categories: Category[];
   day: Date;
   date = new FormControl(new Date());
   highestPriority: number = null;
@@ -23,9 +26,12 @@ export class DayComponent implements OnInit, OnDestroy {
   
   formEvent: Event = {};
 
-  constructor(private eventService: EventService, private route: ActivatedRoute) {}
+  constructor(private eventService: EventService, private categoryService: CategoryService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
+    this.categoryService.loadCategory().subscribe(res =>{
+      this.categories = res;
+    });
     var dateString = this.route.snapshot.paramMap.get('id');
     var eventId = this.route.snapshot.paramMap.get('event');
     this.day = new Date(dateString);
@@ -54,7 +60,7 @@ export class DayComponent implements OnInit, OnDestroy {
     this.eventChangeSubscription.unsubscribe();
   }
 
-  saveEvent(inputs: Event) {
+  saveEvent() {
     this.formEvent.start = this.date.value;
     this.formEvent.done = false;
     this.calculatePriority();
