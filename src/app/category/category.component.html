@@ -1,5 +1,15 @@
 <div class="mdc-layout-grid mdc-layout-grid--align-left demo-grid demo-grid--alignment">
     <div class="mdc-layout-grid__inner">
+        <mat-card *ngFor="let category of categories$ | async" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3 card" (click)="editCategory(category)">
+        <mat-card-title>
+            <h2 style="display: inline-block;">{{category.category}}</h2>
+            <div class="color-box" [ngStyle]="{'background-color': category.color}"></div>
+        </mat-card-title>
+        </mat-card>
+    </div>
+</div>
+<div class="mdc-layout-grid mdc-layout-grid--align-left demo-grid demo-grid--alignment">
+    <div class="mdc-layout-grid__inner">
         <mat-card class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
             <mat-card-title>
                 <h2>New Category</h2>
@@ -13,8 +23,8 @@
                       </div>
                       <div class="form-group">
                         <label for="color" style="display: block;">Color *</label>
-                        <input [(ngModel)]="formCategory.color" required class="form-control" name="color" style="width: 257px; display: inline-block; margin-right: 5px;"/>
-                        <input [(colorPicker)]="formCategory.color" [style.background]="formCategory.color" style="width: 38px; height: 38px; position: relative; bottom: 1px;"/>
+                        <input class="form-control" [(ngModel)]="formCategory.color" required  name="color" style="width: 257px; display: inline-block; margin-right: 5px;"/>
+                        <input class="color-picker" [(colorPicker)]="formCategory.color" [style.background]="formCategory.color"/>
                       </div>
                     <span>
                         <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Save</button>

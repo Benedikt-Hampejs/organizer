@@ -8,5 +8,5 @@ export interface Event {
   description?: string;
   done?: boolean;
   priroty?: number;
-  category?: Category;
+  category?: number;
 }

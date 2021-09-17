@@ -1,130 +1,84 @@
 {
   "events": [
     {
-      "title": "fdas",
-      "description": "gfsdgfds",
-      "start": "2021-09-01T00:00:00.000Z",
+      "title": "jhgjhgfdhg",
+      "description": "oiuz",
+      "category": 2,
+      "start": "2021-09-17T00:00:00.000Z",
       "done": true,
-      "priroty": 2021081702,
+      "priroty": 2021081700,
       "id": 1,
-      "end": "2021-09-16T14:37:03.233Z"
+      "end": "2021-09-17T20:24:42.567Z"
     },
     {
-      "title": "day7",
-      "description": "jhgf",
-      "start": "2021-09-07T00:00:00.000Z",
-      "done": true,
-      "priroty": 2021081302,
-      "id": 6,
-      "end": "2021-09-13T18:17:01.013Z"
-    },
-    {
-      "title": "trzer",
-      "description": "ztrezrte",
-      "start": "2021-09-06T00:00:00.000Z",
+      "title": "hgffd",
+      "description": "hgfdhgfd",
+      "category": 1,
+      "start": "2021-09-17T00:00:00.000Z",
       "done": false,
       "priroty": 2021081700,
-      "id": 7
+      "id": 2,
+      "end": null
     },
     {
-      "title": "ztreztre",
-      "description": "ztreztr",
-      "start": "2021-09-21T00:00:00.000Z",
-      "done": false,
-      "priroty": 2021082101,
-      "id": 8
-    },
-    {
-      "title": "tag 14",
-      "description": "fjdasköl",
-      "start": "2021-09-14T00:00:00.000Z",
-      "done": true,
-      "priroty": 2021081700,
-      "id": 9,
-      "end": "2021-09-17T18:05:22.689Z"
-    },
-    {
-      "title": "Tag 12",
-      "description": "fdasfsd",
-      "start": "2021-09-12T00:00:00.000Z",
+      "title": "gfsd",
+      "description": "gfsd",
+      "category": 3,
+      "start": "2021-09-17T00:00:00.000Z",
       "done": true,
       "priroty": 2021081701,
-      "id": 11,
-      "end": "2021-09-17T18:05:23.573Z"
+      "id": 3,
+      "end": "2021-09-17T20:24:44.033Z"
     },
     {
-      "title": "Tag 15",
-      "description": "gfdasgf",
-      "start": "2021-09-15T00:00:00.000Z",
+      "title": "hgfd",
+      "description": "hgfd",
+      "category": 4,
+      "start": "2021-09-17T00:00:00.000Z",
       "done": false,
-      "priroty": 2021081705,
-      "id": 12
+      "priroty": 2021081704,
+      "id": 4
     },
     {
-      "title": "sfgd",
-      "description": "sdfg",
-      "start": "2021-09-14T00:00:00.000Z",
-      "done": false,
-      "priroty": 2021081703,
-      "id": 13
-    },
-    {
-      "title": "ert",
-      "description": "dgfh",
-      "start": "2021-09-22T00:00:00.000Z",
-      "done": false,
-      "priroty": 2021081403,
-      "id": 14
-    },
-    {
-      "title": "sdfg",
-      "description": "sdfgsf",
-      "start": "2021-09-24T00:00:00.000Z",
-      "done": false,
-      "priroty": 2021081403,
-      "id": 15
-    },
-    {
-      "title": "Tag28",
-      "description": "Tag28",
-      "start": "2021-09-28T00:00:00.000Z",
-      "done": false,
-      "priroty": 2021082102,
-      "id": 16
-    },
-    {
-      "title": "asdf",
-      "description": "asdf",
-      "start": null,
+      "title": "hgfd",
+      "description": "hgfd",
+      "start": "2021-09-17T00:00:00.000Z",
       "done": true,
-      "priroty": 2021081703,
-      "id": 17,
-      "end": "2021-09-17T18:05:24.424Z"
+      "priroty": 2021081702,
+      "id": 5,
+      "end": "2021-09-17T20:24:41.250Z"
     },
     {
-      "description": "asdf",
-      "title": "adsf",
-      "start": "2021-09-11T00:00:00.000Z",
+      "category": 3,
+      "title": "fd",
+      "description": "dfgd",
+      "start": "2021-09-17T00:00:00.000Z",
       "done": false,
-      "priroty": 2021080501,
-      "id": 18
+      "priroty": 2021081703,
+      "id": 6,
+      "end": null
     }
   ],
   "categories": [
     {
-      "category": "Master",
+      "category": "Master1",
       "color": "#9b5757",
       "id": 1
     },
     {
       "category": "Master - First",
-      "color": "#4d4646",
+      "color": "#ee4646",
       "id": 2
     },
     {
-      "category": "Benschi",
-      "color": "#354eba",
+      "category": "Stefan",
+      "color": "#72ba35",
       "id": 3
+    },
+    {
+      "category": "z5tre",
+      "color": "#f23b3b",
+      "id": 4
     }
   ]
 }

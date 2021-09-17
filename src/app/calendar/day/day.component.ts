@@ -9,6 +9,7 @@ import { FormControl } from '@angular/forms';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { CategoryService } from 'src/app/services/category-service/category.service';
 import { Category } from 'src/app/models/Category';
+import { bufferToggle } from 'rxjs/internal/operators';
 
 @Component({
   selector: 'app-day',
@@ -18,6 +19,7 @@ import { Category } from 'src/app/models/Category';
 export class DayComponent implements OnInit, OnDestroy {
   events$: Observable<Event[]>;
   categories: Category[];
+  category: Category;
   day: Date;
   date = new FormControl(new Date());
   highestPriority: number = null;
@@ -94,5 +96,13 @@ export class DayComponent implements OnInit, OnDestroy {
     } else {
       this.highestPriority++;
     }
+  }
+  temp:Category[];
+  getColorByEvent(category: number): String{
+    if(category == undefined) {
+      return '#3f51b5';
+
+    }
+    return this.categories.filter(c => c.id === category)[0].color;
   }
 }

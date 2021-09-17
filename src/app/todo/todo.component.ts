@@ -20,7 +20,8 @@ import { Category } from '../models/Category';
 export class TodoComponent implements OnInit {
 
   events$: Observable<Event[]>;
-  
+  categories: Category[];
+
   showEventDetail:boolean = false;
   clickedEvent: Event;
   todo:Event[] = [
@@ -32,7 +33,7 @@ export class TodoComponent implements OnInit {
   ];
 
 
-  constructor(private eventService: EventService, private activeRoute: ActivatedRoute) { }
+  constructor(private eventService: EventService, private categoryService: CategoryService,private activeRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
     
@@ -55,6 +56,7 @@ export class TodoComponent implements OnInit {
     })});
 
     this.activeRoute.params.subscribe((params) =>  {console.log(params)});
+    this.categoryService.loadCategory().subscribe(c => this.categories = c);
   }
 
   
@@ -113,4 +115,12 @@ export class TodoComponent implements OnInit {
     }
     this.clickedEvent = event;
   }
+
+  getColorByEvent(category: number): String{
+    if(category == undefined) {
+      return '#3f51b5';
+    }
+    return this.categories.filter(c => c.id === category)[0].color;
+  }
+
 }

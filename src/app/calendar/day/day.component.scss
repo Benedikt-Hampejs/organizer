@@ -22,5 +22,15 @@ mat-card-title span{
     height: 34px;
     line-height: 31px;
     padding-left: 5px;
-    border: solid #ccc 1px
+    border: solid #ccc 1px;
+    background:white;
+    border-radius: 3px;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+.category-dropdown:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: #98a2db;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(63, 81, 181, 0.25);
 }

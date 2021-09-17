@@ -9,11 +9,11 @@
     <mat-card *ngFor="let event of events$ | async" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3">
       <mat-card-title>
         <h2>{{event.title}}</h2>
-        <span>
-          <button class="text-primary" (click)="setEditEvent(event)" mat-icon-button aria-label="Edit Event">
+        <span >
+          <button [ngStyle]="{'color': getColorByEvent(event.category)}" (click)="setEditEvent(event)" mat-icon-button aria-label="Edit Event">
             <mat-icon>mode</mat-icon>
           </button>
-          <button class="text-primary" (click)="deleteEvent(event)" mat-icon-button aria-label="Edit Event">
+          <button [ngStyle]="{'color': getColorByEvent(event.category)}" (click)="deleteEvent(event)" mat-icon-button aria-label="Edit Event">
             <mat-icon>delete</mat-icon>
           </button>
         </span>
@@ -34,7 +34,7 @@
         <h2>New Event</h2>
       </mat-card-title>
       <mat-card-content>
-        <form novalidate #form="ngForm" (ngSubmit)="saveEvent(form.value)">
+        <form novalidate #form="ngForm" (ngSubmit)="saveEvent()">
           <div class="form-group">
             <label for="title">Title *</label>
             <input [(ngModel)]="formEvent.title" required type="text" class="form-control" name="title"
@@ -53,14 +53,11 @@
               <mat-datepicker #picker1 disabled="false"></mat-datepicker>
             </div>
           </div>
-          <label for="category">Categorysss</label>
-          <div class="form-group category-dropdown">
-            
-            <mat-select >
-              <mat-option *ngFor="let category of categories" [value]="category.category" [(ngModel)]="formEvent.category">
-                {{category.category}}
-              </mat-option>
-            </mat-select>
+          <label for="category">Category</label>
+          <div class="form-group "> 
+            <select type="number" [(ngModel)]="formEvent.category" class="category-dropdown" name="category">
+              <option *ngFor="let category of categories" [ngValue]="category.id">{{category.category}}</option>
+            </select>
           </div>
           <span>
             <a routerLink="/calender" class="btn btn-secondary" role="button" aria-pressed="true">Back</a>&nbsp;
@@ -74,5 +71,3 @@
     </mat-card>
   </div>
 </div>
-
-{{formEvent | json}}

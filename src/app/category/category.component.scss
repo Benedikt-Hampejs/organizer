@@ -1,0 +1,26 @@
+.color-box {
+    float:right; 
+    margin-right:10px;
+    width:30px;
+    height:30px; 
+    border-radius: 10px;
+    border:1px solid white;
+}
+.color-picker {
+    border-radius:10px;
+    width: 38px; 
+    height: 38px; 
+    position: relative; 
+    bottom: 1px;
+    border: 1px solid #ccc;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+.color-picker:focus {
+    outline: none;
+    border-color: #98a2db;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(63, 81, 181, 0.25);
+}
+.card:hover {
+    cursor: pointer;
+}
