@@ -1,7 +1,7 @@
 <div class="wrapper">
-    <h2>Schnellansicht</h2>
-    <div><h3>Titel</h3> <p>{{event?.title}}</p></div>
-    <div><h3>Beschreibung</h3> <p>{{event?.description}}</p></div>
-    <div><h3>Datum</h3>{{event?.start | date:'dd.MM.yyyy'}}</div>
+    <h1>Event Overview</h1>
+    <div><h2>Title</h2> <p>{{event?.title}}</p></div>
+    <div><h2>Description</h2> <p>{{event?.description}}</p></div>
+    <div><h2>Date</h2>{{event?.start | date:'dd.MM.yyyy'}}</div>
+    <div class="mt-3"><a routerLink="/calender/day/{{event?.start | date:'yyyy-MM-dd'}}/{{event?.id}}">Edit event</a></div>
 </div>
-<a routerLink="/calender/day/{{event?.start | date:'yyyy-MM-dd'}}/{{event?.id}}">Event Bearbeiten</a>

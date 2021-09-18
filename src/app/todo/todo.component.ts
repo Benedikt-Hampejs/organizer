@@ -117,7 +117,7 @@ export class TodoComponent implements OnInit {
   }
 
   getColorByEvent(category: number): String{
-    if(category == undefined) {
+    if(this.categories == undefined || category == undefined) {
       return '#3f51b5';
     }
     return this.categories.filter(c => c.id === category)[0].color;

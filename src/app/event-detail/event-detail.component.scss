@@ -1,5 +1,19 @@
-.wrapper {
-    border-left: 1px solid #aaa;
-    padding-left: 10px;
-    height: 100%;
+@media (min-width: 992px) {
+    .wrapper  {
+        top: 49px;
+        padding-top: 32px;
+        position: fixed;
+        width: calc(33% - 70px);
+        right:0px;
+        height:100%;
+        border-left: 1px solid #ccc;
+        padding-left: 10px;
+    }
+}
+@media (max-width: 992px) {
+    .wrapper  {
+        border-top: 1px solid #ccc;
+        margin-top: 20px;
+        padding-top: 10px;
+    }
 }

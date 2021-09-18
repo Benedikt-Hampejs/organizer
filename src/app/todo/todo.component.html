@@ -1,30 +1,26 @@
-<div class="example-container">
-    <h2>To do</h2>
-  
-    <div
-      cdkDropList
-      #todoList="cdkDropList"
-      [cdkDropListData]="todo"
-      [cdkDropListConnectedTo]="[doneList]"
-      class="example-list"
-      (cdkDropListDropped)="drop($event)">
-      <div class="example-box" *ngFor="let item of todo" cdkDrag (click)="showEvent(item)" [ngStyle]="{'background': getColorByEvent(item.category)+30}">{{item.title}}</div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-4">
+      <h1>To do</h1>
+
+      <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="todo" [cdkDropListConnectedTo]="[doneList]"
+        class="example-list" (cdkDropListDropped)="drop($event)">
+        <div class="example-box" *ngFor="let item of todo" cdkDrag (click)="showEvent(item)"
+          [ngStyle]="{'background': getColorByEvent(item.category)+30}">{{item.title}}</div>
+      </div>
+    </div>
+
+    <div class="col-lg-4">
+      <h1>Done</h1>
+
+      <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="done" [cdkDropListConnectedTo]="[todoList]"
+        class="example-list" (cdkDropListDropped)="drop($event)">
+        <div class="example-box" *ngFor="let item of done" cdkDrag (click)="showEvent(item)"
+          [ngStyle]="{'background': getColorByEvent(item.category)+30}">{{item.title}}</div>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <app-event-detail *ngIf="showEventDetail" [event]='clickedEvent'></app-event-detail>
     </div>
   </div>
-  
-  <div class="example-container">
-    <h2>Done</h2>
-  
-    <div
-      cdkDropList
-      #doneList="cdkDropList"
-      [cdkDropListData]="done"
-      [cdkDropListConnectedTo]="[todoList]"
-      class="example-list"
-      (cdkDropListDropped)="drop($event)">
-      <div class="example-box" *ngFor="let item of done" cdkDrag (click)="showEvent(item)" [ngStyle]="{'background': getColorByEvent(item.category)+30}">{{item.title}}</div>
-    </div>
-  </div>
-  <app-event-detail *ngIf="showEventDetail" [event]='clickedEvent'></app-event-detail>
-  
-  
+</div>

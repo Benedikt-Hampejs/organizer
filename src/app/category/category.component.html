@@ -1,3 +1,4 @@
+<h1>Category</h1>
 <div class="mdc-layout-grid mdc-layout-grid--align-left demo-grid demo-grid--alignment">
     <div class="mdc-layout-grid__inner">
         <mat-card *ngFor="let category of categories$ | async" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3 card" (click)="editCategory(category)">
@@ -30,10 +31,8 @@
                         <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Save</button>
                     </span>
                 </form>
+                <div class="text-muted mt-3">* kennzeichnet Pflichtfelder</div>
             </mat-card-content>
-            <mat-card-footer class="text-muted">
-                * kennzeichnet Pflichtfelder
-            </mat-card-footer>
         </mat-card>
     </div>
 </div>
