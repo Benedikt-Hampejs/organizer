@@ -5,10 +5,10 @@
       "description": "oiuz",
       "category": 2,
       "start": "2021-09-17T00:00:00.000Z",
-      "done": true,
-      "priroty": 2021081700,
+      "done": false,
+      "priroty": 2021081800,
       "id": 1,
-      "end": "2021-09-17T20:24:42.567Z"
+      "end": null
     },
     {
       "title": "hgffd",
@@ -16,7 +16,7 @@
       "category": 1,
       "start": "2021-09-17T00:00:00.000Z",
       "done": false,
-      "priroty": 2021081700,
+      "priroty": 2021081802,
       "id": 2,
       "end": null
     },
@@ -26,7 +26,7 @@
       "category": 3,
       "start": "2021-09-17T00:00:00.000Z",
       "done": true,
-      "priroty": 2021081701,
+      "priroty": 2021081801,
       "id": 3,
       "end": "2021-09-17T20:24:44.033Z"
     },
@@ -35,16 +35,17 @@
       "description": "hgfd",
       "category": 4,
       "start": "2021-09-17T00:00:00.000Z",
-      "done": false,
-      "priroty": 2021081704,
-      "id": 4
+      "done": true,
+      "priroty": 2021081802,
+      "id": 4,
+      "end": "2021-09-18T15:46:42.319Z"
     },
     {
       "title": "hgfd",
       "description": "hgfd",
       "start": "2021-09-17T00:00:00.000Z",
       "done": true,
-      "priroty": 2021081702,
+      "priroty": 2021081803,
       "id": 5,
       "end": "2021-09-17T20:24:41.250Z"
     },
@@ -54,7 +55,7 @@
       "description": "dfgd",
       "start": "2021-09-17T00:00:00.000Z",
       "done": false,
-      "priroty": 2021081703,
+      "priroty": 2021081800,
       "id": 6,
       "end": null
     }
