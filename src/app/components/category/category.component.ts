@@ -12,6 +12,8 @@ import { Alert, ALERTS } from "../../models/Alert";
 export class CategoryComponent implements OnInit {
 
   alerts: Alert[] = [];
+  successAlert = ALERTS.filter(s => s.type == "success")[0];
+
 
   categories$: Observable<Category[]>;
 
@@ -25,8 +27,9 @@ export class CategoryComponent implements OnInit {
 
   saveCategory() {
     this.categoryService.saveCategory(this.formCategory).subscribe();
-    this.alerts.push(ALERTS.filter(s => s.type == "success")[0]);
-    //setTimeout(()=>this.alerts.pop(),3000);
+    const alert: Alert = new Alert(this.successAlert);
+    this.alerts.push(alert);
+    setTimeout(()=>this.close(alert), 3000);
   }
 
   editCategory(c: Category) {

@@ -1,6 +1,11 @@
-export interface Alert {
+export class Alert {
     type: string;
     message: string;
+    
+    constructor(alert: Alert) {
+      this.message = alert.message;
+      this.type = alert.type;
+    }
 }
 
 export const ALERTS: Alert[] = [{

@@ -1,45 +1,46 @@
 <p *ngFor="let alert of alerts">
-    <ngb-alert class="slide-in" [type]="alert.type" (closed)="close(alert)">{{ alert.message }}</ngb-alert>
+    <ngb-alert alert-directive  [type]="alert.type" (closed)="close(alert)">{{ alert.message }}</ngb-alert>
   </p>
-
-<h1>Category</h1>
-<div class="mdc-layout-grid mdc-layout-grid--align-left demo-grid demo-grid--alignment">
-    <div class="mdc-layout-grid__inner">
-        <mat-card *ngFor="let category of categories$ | async"
-            class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3 card" (click)="editCategory(category)">
-            <mat-card-title>
-                <h2 style="display: inline-block;">{{category.category}}</h2>
-                <div class="color-box" [ngStyle]="{'background-color': category.color}"></div>
-            </mat-card-title>
-        </mat-card>
+<div style="animation-timing-function: linear;">
+    <h1>Category</h1>
+    <div class="mdc-layout-grid mdc-layout-grid--align-left demo-grid demo-grid--alignment">
+        <div class="mdc-layout-grid__inner">
+            <mat-card *ngFor="let category of categories$ | async"
+                class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3 card" (click)="editCategory(category)">
+                <mat-card-title>
+                    <h2 style="display: inline-block;">{{category.category}}</h2>
+                    <div class="color-box" [ngStyle]="{'background-color': category.color}"></div>
+                </mat-card-title>
+            </mat-card>
+        </div>
     </div>
-</div>
-<div class="mdc-layout-grid mdc-layout-grid--align-left demo-grid demo-grid--alignment">
-    <div class="mdc-layout-grid__inner">
-        <mat-card class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
-            <mat-card-title>
-                <h2>New Category</h2>
-            </mat-card-title>
-            <mat-card-content>
-                <form novalidate #form="ngForm" (ngSubmit)="saveCategory()">
-                    <div class="form-group">
-                        <label for="category">Category *</label>
-                        <input [(ngModel)]="formCategory.category" required type="text" class="form-control"
-                            name="category" placeholder="Enter new category" style="width: 300px" />
-                    </div>
-                    <div class="form-group">
-                        <label for="color" style="display: block;">Color *</label>
-                        <input class="form-control" [(ngModel)]="formCategory.color" required name="color"
-                            style="width: 257px; display: inline-block; margin-right: 5px;" />
-                        <input class="color-picker" [(colorPicker)]="formCategory.color"
-                            [style.background]="formCategory.color" />
-                    </div>
-                    <span>
-                        <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Save</button>
-                    </span>
-                </form>
-                <div class="text-muted mt-3">* kennzeichnet Pflichtfelder</div>
-            </mat-card-content>
-        </mat-card>
+    <div class="mdc-layout-grid mdc-layout-grid--align-left demo-grid demo-grid--alignment">
+        <div class="mdc-layout-grid__inner">
+            <mat-card class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+                <mat-card-title>
+                    <h2>New Category</h2>
+                </mat-card-title>
+                <mat-card-content>
+                    <form novalidate #form="ngForm" (ngSubmit)="saveCategory()">
+                        <div class="form-group">
+                            <label for="category">Category *</label>
+                            <input [(ngModel)]="formCategory.category" required type="text" class="form-control"
+                                name="category" placeholder="Enter new category" style="width: 300px" />
+                        </div>
+                        <div class="form-group">
+                            <label for="color" style="display: block;">Color *</label>
+                            <input class="form-control" [(ngModel)]="formCategory.color" required name="color"
+                                style="width: 257px; display: inline-block; margin-right: 5px;" />
+                            <input class="color-picker" [(colorPicker)]="formCategory.color"
+                                [style.background]="formCategory.color" />
+                        </div>
+                        <span>
+                            <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Save</button>
+                        </span>
+                    </form>
+                    <div class="text-muted mt-3">* kennzeichnet Pflichtfelder</div>
+                </mat-card-content>
+            </mat-card>
+        </div>
     </div>
 </div>

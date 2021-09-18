@@ -38,6 +38,7 @@ import { CategoryComponent } from './components/category/category.component';
 
 import { ColorPickerModule } from 'ngx-color-picker';
 import { TimerComponent } from './components/timer/timer.component';
+import { AnimateAlertDirective } from './directives/animate-alert.directive';
 
 
 
@@ -50,6 +51,7 @@ import { TimerComponent } from './components/timer/timer.component';
     EventDetailComponent,
     CategoryComponent,
     TimerComponent,
+    AnimateAlertDirective,
   ],
   imports: [
     appRouting,
