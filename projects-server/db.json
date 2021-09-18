@@ -1,32 +1,12 @@
 {
   "events": [
     {
-      "title": "jhgjhgfdhg",
-      "description": "oiuz",
-      "category": 2,
-      "start": "2021-09-17T00:00:00.000Z",
-      "done": false,
-      "priroty": 2021081800,
-      "id": 1,
-      "end": null
-    },
-    {
-      "title": "hgffd",
-      "description": "hgfdhgfd",
-      "category": 1,
-      "start": "2021-09-17T00:00:00.000Z",
-      "done": false,
-      "priroty": 2021081802,
-      "id": 2,
-      "end": null
-    },
-    {
       "title": "gfsd",
       "description": "gfsd",
       "category": 3,
       "start": "2021-09-17T00:00:00.000Z",
       "done": true,
-      "priroty": 2021081801,
+      "priroty": 2021081800,
       "id": 3,
       "end": "2021-09-17T20:24:44.033Z"
     },
@@ -45,7 +25,7 @@
       "description": "hgfd",
       "start": "2021-09-17T00:00:00.000Z",
       "done": true,
-      "priroty": 2021081803,
+      "priroty": 2021081804,
       "id": 5,
       "end": "2021-09-17T20:24:41.250Z"
     },
@@ -84,12 +64,49 @@
       "done": false,
       "priroty": 2021081805,
       "id": 9
+    },
+    {
+      "title": "adsfaadsfa",
+      "description": "dasf",
+      "category": 2,
+      "start": "2021-09-24T00:00:00.000Z",
+      "done": false,
+      "priroty": 2021081806,
+      "id": 10
+    },
+    {
+      "title": 111,
+      "description": 111,
+      "category": 2,
+      "start": "2021-09-21T00:00:00.000Z",
+      "done": false,
+      "priroty": 2021081807,
+      "id": 11
+    },
+    {
+      "title": 111,
+      "description": 111,
+      "category": 2,
+      "start": "2021-09-18T00:00:00.000Z",
+      "done": true,
+      "priroty": 2021081803,
+      "id": 12,
+      "end": "2021-09-18T17:24:36.319Z"
+    },
+    {
+      "title": "asdfasdfasdfadsf",
+      "description": "adsf",
+      "category": 1,
+      "start": "2021-09-13T00:00:00.000Z",
+      "done": false,
+      "priroty": 2021081301,
+      "id": 13
     }
   ],
   "categories": [
     {
       "category": "Master1",
-      "color": "#9b5757",
+      "color": "#2e76f9",
       "id": 1
     },
     {

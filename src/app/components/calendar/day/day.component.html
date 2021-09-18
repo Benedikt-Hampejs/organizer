@@ -6,18 +6,22 @@
 
 <div class="mdc-layout-grid mdc-layout-grid--align-left demo-grid demo-grid--alignment">
   <div class="mdc-layout-grid__inner">
-    <mat-card *ngFor="let event of events$ | async" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3"  [ngClass]="{'cross-out-text': event.done}">
+    <mat-card *ngFor="let event of events$ | async" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3"
+      [ngClass]="{'cross-out-text': event.done}">
       <mat-card-title>
         <h2>{{event.title}}</h2>
-        <span >
-          <button [ngStyle]="{'color': getColorByEvent(event.category)}" (click)="changeStatusEvent(event)" mat-icon-button aria-label="Finish Event">
+        <span>
+          <button [ngStyle]="{'color': getColorByEvent(event.category)}" (click)="changeStatusEvent(event)"
+            mat-icon-button aria-label="Finish Event">
             <mat-icon *ngIf="event.done">close</mat-icon>
             <mat-icon *ngIf="!event.done">done</mat-icon>
           </button>
-          <button [ngStyle]="{'color': getColorByEvent(event.category)}" (click)="setEditEvent(event)" mat-icon-button aria-label="Edit Event">
+          <button [ngStyle]="{'color': getColorByEvent(event.category)}" (click)="setEditEvent(event)" mat-icon-button
+            aria-label="Edit Event">
             <mat-icon>mode</mat-icon>
           </button>
-          <button [ngStyle]="{'color': getColorByEvent(event.category)}" (click)="deleteEvent(event)" mat-icon-button aria-label="Edit Event">
+          <button [ngStyle]="{'color': getColorByEvent(event.category)}" (click)="deleteEvent(event)" mat-icon-button
+            aria-label="Edit Event">
             <mat-icon>delete</mat-icon>
           </button>
         </span>
@@ -58,7 +62,7 @@
             </div>
           </div>
           <label for="category">Category</label>
-          <div class="form-group "> 
+          <div class="form-group ">
             <select type="number" [(ngModel)]="formEvent.category" class="category-dropdown" name="category">
               <option *ngFor="let category of categories" [ngValue]="category.id">{{category.category}}</option>
             </select>

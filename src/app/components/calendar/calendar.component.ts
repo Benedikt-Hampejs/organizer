@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { CalendarEvent, CalendarView } from 'angular-calendar';
-import { EventService } from '../services/event-service/event.service';
-import { Event } from '../models/Event';
+import { EventService } from '../../services/event-service/event.service';
+import { Event } from '../../models/Event';
 import { ActivatedRoute, Router } from '@angular/router';
 import { timestamp } from 'rxjs/internal/operators';
 import { Observable, Subject } from 'rxjs';

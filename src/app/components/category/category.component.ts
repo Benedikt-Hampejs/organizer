@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Category } from '../models/Category';
-import { CategoryService } from '../services/category-service/category.service';
+import { Category } from '../../models/Category';
+import { CategoryService } from '../../services/category-service/category.service';
 
 @Component({
   selector: 'app-category',
@@ -28,7 +28,5 @@ export class CategoryComponent implements OnInit {
   editCategory(c: Category) {
     this.formCategory = c;
   }
-
   
-
 }

@@ -1,12 +1,8 @@
-import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { DashboardComponent} from './dashboard/dashboard.component';
-import { TodoComponent} from './todo/todo.component';
-import { calendarRoutes, calendarRoutingComponents} from  './calendar/calendar.routing';
-import { EventDetailComponent } from './event-detail/event-detail.component';
-import { CategoryComponent } from './category/category.component';
-
-
+import { DashboardComponent} from './components/dashboard/dashboard.component';
+import { TodoComponent} from './components/todo/todo.component';
+import { calendarRoutes, calendarRoutingComponents} from  './components/calendar/calendar.routing';
+import { CategoryComponent } from './components/category/category.component';
 
 const routes: Routes = [
   {path: '', component: DashboardComponent},

@@ -1,15 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import {CdkDragDrop, moveItemInArray, transferArrayItem, CdkDropList} from '@angular/cdk/drag-drop';
-import {EventService} from '../services/event-service/event.service';
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { EventService } from '../../services/event-service/event.service';
 import { Observable } from 'rxjs';
-import {Event} from 'src/app/models/Event';
-import { calculatePriortyByDay } from '../helper'
-import { ActivatedRoute, Router } from '@angular/router';
-import { CategoryComponent } from '../category/category.component';
-import { CategoryService } from '../services/category-service/category.service';
-import { Category } from '../models/Category';
-
-
+import { Event } from 'src/app/models/Event';
+import { calculatePriortyByDay } from '../../helper'
+import { ActivatedRoute } from '@angular/router';
+import { CategoryService } from '../../services/category-service/category.service';
+import { Category } from '../../models/Category';
 
 
 @Component({
@@ -20,46 +17,42 @@ import { Category } from '../models/Category';
 export class TodoComponent implements OnInit {
 
   events$: Observable<Event[]>;
-  categories: Category[];
+  categories: Category[] = [];
 
-  showEventDetail:boolean = false;
+  showEventDetail: boolean = false;
   clickedEvent: Event;
-  todo:Event[] = [
+  todo: Event[] = [];
 
-  ];
+  done: Event[] = [];
 
-  done:Event[] = [
-
-  ];
-
-
-  constructor(private eventService: EventService, private categoryService: CategoryService,private activeRoute: ActivatedRoute) { }
+  constructor(private eventService: EventService, private categoryService: CategoryService, private activeRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-    
+
     this.events$ = this.eventService.loadEvents(null);
     this.events$.subscribe(res => {
-      res.sort((a,b) => a.priroty - b.priroty);
+      res.sort((a, b) => a.priroty - b.priroty);
       res.forEach(e => {
         const tomorrow: Date = this.getTomorrow();
         const yesterday: Date = this.getYesterday();
-        if(new Date(e.start) < tomorrow) {
-          if(e.done === true) {
-            if(new Date(e.end) > yesterday) {
+        if (new Date(e.start) < tomorrow) {
+          if (e.done === true) {
+            if (new Date(e.end) > yesterday) {
               this.done = [...this.done, e];
             }
           } else {
             this.todo = [...this.todo, e];
           }
         }
-        
-    })});
 
-    this.activeRoute.params.subscribe((params) =>  {console.log(params)});
+      })
+    });
+
+    this.activeRoute.params.subscribe((params) => { console.log(params) });
     this.categoryService.loadCategory().subscribe(c => this.categories = c);
   }
 
-  
+
 
 
   private getTomorrow() {
@@ -86,9 +79,9 @@ export class TodoComponent implements OnInit {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
       transferArrayItem(event.previousContainer.data,
-                        event.container.data,
-                        event.previousIndex,
-                        event.currentIndex);
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex);
       const currentItem: Event = event.container.data[event.currentIndex];
       this.updateDone(event, currentItem);
       this.eventService.updateEventDone(currentItem);
@@ -100,24 +93,23 @@ export class TodoComponent implements OnInit {
     });
   }
 
-  private updateDone(event: CdkDragDrop<Event[], Event[]>, currentItem:Event) {
+  private updateDone(event: CdkDragDrop<Event[], Event[]>, currentItem: Event) {
     currentItem.done = !currentItem.done;
   }
 
   showEvent(event: Event) {
-    if(!this.showEventDetail || this.clickedEvent.id !== event.id) {
+    if (!this.showEventDetail || this.clickedEvent.id !== event.id) {
       this.showEventDetail = true;
       console.log("show");
-    } else{
+    } else {
       this.showEventDetail = false;
       console.log("hide");
-
     }
     this.clickedEvent = event;
   }
 
-  getColorByEvent(category: number): String{
-    if(this.categories == undefined || category == undefined) {
+  getColorByEvent(category: number): String {
+    if (category == undefined) {
       return '#3f51b5';
     }
     return this.categories.filter(c => c.id === category)[0].color;

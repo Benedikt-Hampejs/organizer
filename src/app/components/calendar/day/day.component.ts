@@ -1,15 +1,12 @@
-import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
-import {Event} from 'src/app/models/Event';
-import {HttpClient} from '@angular/common/http'
-import {EventService} from '../../services/event-service/event.service';
-import { Observable, Subscriber, Subscription } from 'rxjs';
-import { ActivatedRoute, Router } from '@angular/router';
-import { calculatePriortyByDay } from '../../helper'
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Event } from 'src/app/models/Event';
+import { EventService } from '../../../services/event-service/event.service';
+import { Observable, Subscription } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import { calculatePriortyByDay } from '../../../helper'
 import { FormControl } from '@angular/forms';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { CategoryService } from 'src/app/services/category-service/category.service';
 import { Category } from 'src/app/models/Category';
-import { bufferToggle } from 'rxjs/internal/operators';
 
 @Component({
   selector: 'app-day',
@@ -23,7 +20,7 @@ export class DayComponent implements OnInit, OnDestroy {
   day: Date;
   date = new FormControl(new Date());
   highestPriority: number = null;
-  //events: Event[] = [];
+
   eventChangeSubscription: Subscription;
   
   formEvent: Event = {};
@@ -72,7 +69,6 @@ export class DayComponent implements OnInit, OnDestroy {
 
     console.log(this.day.getDay(), this.highestPriority);
     this.eventService.saveEvent(this.formEvent).subscribe();
-    //this.events.push(inputs);
     this.formEvent = {}
     this.date = new FormControl(this.day);
   }
@@ -101,7 +97,6 @@ export class DayComponent implements OnInit, OnDestroy {
   getColorByEvent(category: number): String{
     if(category == undefined) {
       return '#3f51b5';
-
     }
     return this.categories.filter(c => c.id === category)[0].color;
   }

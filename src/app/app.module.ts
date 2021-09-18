@@ -24,20 +24,20 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { DatePipe } from '@angular/common';
 
 
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { TodoComponent } from './todo/todo.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { TodoComponent } from './components/todo/todo.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
-import { TabsComponent, TabComponent} from './tabs/tabs.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { EventService } from './services/event-service/event.service';
 import { CategoryService } from './services/category-service/category.service';
 import { HttpClientModule} from '@angular/common/http';
-import { EventDetailComponent } from './event-detail/event-detail.component';
-import { CategoryComponent } from './category/category.component';
+import { EventDetailComponent } from './components/event-detail/event-detail.component';
+import { CategoryComponent } from './components/category/category.component';
 
 import { ColorPickerModule } from 'ngx-color-picker';
+import { TimerComponent } from './components/timer/timer.component';
 
 
 
@@ -47,10 +47,9 @@ import { ColorPickerModule } from 'ngx-color-picker';
     routingComponents,
     DashboardComponent,
     TodoComponent,
-    TabsComponent,
-    TabComponent,
     EventDetailComponent,
     CategoryComponent,
+    TimerComponent,
   ],
   imports: [
     appRouting,
