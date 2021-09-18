@@ -24,3 +24,31 @@
 .card:hover {
     cursor: pointer;
 }
+
+.slide-in {
+    left: -100%;
+    width: 100%;
+    -webkit-animation: slide-in 0.5s forwards;
+    animation: slide-in 0.5s forwards;
+}
+// .slide-out {
+//     width: 100%;
+//     -webkit-animation: slide-out 1.5s forwards;
+//     animation: slide-out 1.5s forwards;
+// }
+
+@-webkit-keyframes slide-in {
+    100% { left: 0; }
+}
+
+@keyframes slide-in {
+    100% { left: 0; }
+}
+
+// @-webkit-keyframes slide-out {
+//     100% { left: 100%; }
+// }
+
+// @keyframes slide-out {
+//     100% { left: 100%; }
+// }
