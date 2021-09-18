@@ -5,10 +5,10 @@
       "description": "gfsd",
       "category": 3,
       "start": "2021-09-17T00:00:00.000Z",
-      "done": true,
-      "priroty": 2021081800,
+      "done": false,
+      "priroty": 2021081802,
       "id": 3,
-      "end": "2021-09-17T20:24:44.033Z"
+      "end": null
     },
     {
       "title": "hgfd",
@@ -16,7 +16,7 @@
       "category": 4,
       "start": "2021-09-17T00:00:00.000Z",
       "done": true,
-      "priroty": 2021081802,
+      "priroty": 2021081804,
       "id": 4,
       "end": "2021-09-18T15:46:42.319Z"
     },
@@ -25,7 +25,7 @@
       "description": "hgfd",
       "start": "2021-09-17T00:00:00.000Z",
       "done": true,
-      "priroty": 2021081804,
+      "priroty": 2021081806,
       "id": 5,
       "end": "2021-09-17T20:24:41.250Z"
     },
@@ -34,10 +34,10 @@
       "title": "fd",
       "description": "dfgd",
       "start": "2021-09-17T00:00:00.000Z",
-      "done": false,
-      "priroty": 2021081800,
+      "done": true,
+      "priroty": 2021081807,
       "id": 6,
-      "end": null
+      "end": "2021-09-18T19:56:36.095Z"
     },
     {
       "title": "rwe",
@@ -45,7 +45,7 @@
       "category": 1,
       "start": "2021-09-18T00:00:00.000Z",
       "done": true,
-      "priroty": 2021081801,
+      "priroty": 2021081803,
       "id": 7,
       "end": "2021-09-18T16:04:15.118Z"
     },
@@ -53,17 +53,19 @@
       "title": "kghu",
       "description": "kjh",
       "start": "2021-09-17T00:00:00.000Z",
-      "done": false,
-      "priroty": 2021081804,
-      "id": 8
+      "done": true,
+      "priroty": 2021081808,
+      "id": 8,
+      "end": "2021-09-18T19:56:37.753Z"
     },
     {
       "title": "kjgh",
       "description": "kjhg",
       "start": "2021-09-17T00:00:00.000Z",
-      "done": false,
-      "priroty": 2021081805,
-      "id": 9
+      "done": true,
+      "priroty": 2021081809,
+      "id": 9,
+      "end": "2021-09-18T19:56:36.930Z"
     },
     {
       "title": "adsfaadsfa",
@@ -89,7 +91,7 @@
       "category": 2,
       "start": "2021-09-18T00:00:00.000Z",
       "done": true,
-      "priroty": 2021081803,
+      "priroty": 2021081805,
       "id": 12,
       "end": "2021-09-18T17:24:36.319Z"
     },
@@ -99,8 +101,65 @@
       "category": 1,
       "start": "2021-09-13T00:00:00.000Z",
       "done": false,
-      "priroty": 2021081301,
+      "priroty": 2021081804,
       "id": 13
+    },
+    {
+      "title": "bewerbung schreiben",
+      "description": "gfds\nGFDS\nGFDS\ngfds",
+      "category": 1,
+      "start": "2021-09-19T00:00:00.000Z",
+      "done": false,
+      "priroty": 2021081901,
+      "id": 14
+    },
+    {
+      "title": "gfds",
+      "description": "gfdsgfds",
+      "category": 2,
+      "start": "2021-09-19T00:00:00.000Z",
+      "done": false,
+      "priroty": 2021081902,
+      "id": 15
+    },
+    {
+      "title": "gfdsgfds",
+      "description": "gfdsgfds",
+      "category": 3,
+      "start": "2021-09-19T00:00:00.000Z",
+      "done": false,
+      "priroty": 2021081903,
+      "id": 16
+    },
+    {
+      "title": "Kochen",
+      "description": "fds",
+      "start": "2021-09-18T00:00:00.000Z",
+      "done": false,
+      "priroty": 2021081800,
+      "id": 17,
+      "end": null,
+      "category": 5
+    },
+    {
+      "title": "Küche sauber machen",
+      "description": "fdsa",
+      "category": 1,
+      "start": "2021-09-18T00:00:00.000Z",
+      "done": false,
+      "priroty": 2021081801,
+      "id": 18,
+      "end": null
+    },
+    {
+      "title": "Bewerbung schreiben",
+      "description": "gfdsd",
+      "category": 5,
+      "start": "2021-09-18T00:00:00.000Z",
+      "done": false,
+      "priroty": 2021081803,
+      "id": 19,
+      "end": null
     }
   ],
   "categories": [
@@ -123,6 +182,11 @@
       "category": "z5tre",
       "color": "#f23b3b",
       "id": 4
+    },
+    {
+      "category": "Haushalt",
+      "color": "#67e3d8",
+      "id": 5
     }
   ]
 }

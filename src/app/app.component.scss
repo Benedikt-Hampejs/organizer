@@ -1,7 +1,7 @@
 mat-sidenav-content {
-    display: flex;
-    justify-content: center;
     width: 100%;
+    overflow: hidden;
+    position: initial;
 
     main {
       position: relative;
@@ -14,6 +14,9 @@ mat-sidenav-content {
         max-width: 1200px;
         width: calc(100% - 250px);
       }
+    }
+    .timer-offset {
+      top:220px;
     }
   }
   
@@ -30,4 +33,20 @@ mat-sidenav-content {
     align-items: center;
     justify-content: center;
     width: 200px;
+  }
+  .timer {
+    position:fixed;
+    top:70px;
+    height: 200px;
+    width: calc(90% - 200px);
+    max-width: 1100px;
+    min-width: 300px;
+    background-color: var(--primary);
+    color: white;
+    font-size: 150px;
+    line-height: 190px;
+    text-align: center;
+    border-radius: 10px;
+
+
   }

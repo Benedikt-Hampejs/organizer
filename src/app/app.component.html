@@ -10,10 +10,12 @@
           <a mat-list-item routerLink="/calender">Calendar</a>
           <a mat-list-item routerLink="/todo">Todo</a>
           <a mat-list-item routerLink="/category">Category</a>
+          <a mat-list-item (click)="showTimer = !showTimer">Timer</a>
       </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-    <main [@routeAnimations]="prepareRoute(outlet)">
+    <main [@routeAnimations]="prepareRoute(outlet)" [ngClass]="{'timer-offset': showTimer}">
+      <div *ngIf="showTimer" class="timer">20:00</div>
       <router-outlet #outlet="outlet" ></router-outlet>
   </main>
 </mat-sidenav-content>
