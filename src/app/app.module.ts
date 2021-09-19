@@ -42,6 +42,7 @@ import { TimerComponent } from './components/timer/timer.component';
 import { AnimateAlertDirective } from './directives/animate-alert.directive';
 import { CountdownModule } from 'ngx-countdown';
 import { TimerConfigComponent } from './components/timer-config/timer-config.component';
+import { ChartsModule } from 'ng2-charts';
 
 
 
@@ -58,6 +59,7 @@ import { TimerConfigComponent } from './components/timer-config/timer-config.com
     TimerConfigComponent,
   ],
   imports: [
+    ChartsModule,
     appRouting,
     DragDropModule,
     FormsModule,
