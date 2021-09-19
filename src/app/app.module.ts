@@ -39,6 +39,7 @@ import { CategoryComponent } from './components/category/category.component';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { TimerComponent } from './components/timer/timer.component';
 import { AnimateAlertDirective } from './directives/animate-alert.directive';
+import { CountdownModule } from 'ngx-countdown';
 
 
 
@@ -77,7 +78,8 @@ import { AnimateAlertDirective } from './directives/animate-alert.directive';
     MatMomentDateModule,
     CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
     ColorPickerModule,
-    MatSelectModule
+    MatSelectModule,
+    CountdownModule
   ],
   providers: [EventService, CategoryService, DatePipe,
     {provide: MAT_DATE_LOCALE, useValue: 'de-DE'},
