@@ -17,7 +17,7 @@
     <main [@routeAnimations]="prepareRoute(outlet)" [ngClass]="{'timer-offset': showTimer}">
       <div class="container">
         <app-timer [ngClass]="{'hide':!showTimer}"></app-timer>
-        <router-outlet #outlet="outlet" ></router-outlet>
+        <router-outlet #outlet="outlet" (activate)="onRouterOutletActivate($event)"></router-outlet>
       </div>
   </main>
 </mat-sidenav-content>

@@ -3,10 +3,11 @@
     max-width: 1200px;
     background-color: var(--primary);
     color: white;
-    font-size: 150px;
-    line-height: 190px;
-    text-align: center;
     border-radius: 10px;
+}
+.countdown {
+  font-size: 150px;
+  line-height: 190px;
 
 }
 .buttons {
@@ -15,8 +16,8 @@
   display: block;
 
   button {
+    color: var(--primary);
     background-color: #fafafa;
-    color:var(--primary);
     width: 100px;
     margin-left: 3px;
     margin-right:3px;
@@ -25,6 +26,39 @@
     background-color: var(--secondary);
   }
 }
+
+.small-break {
+  background-color: var(--secondary);
+
+  button{
+    color: var(--secondary);
+  }
+
+
+  button:hover{
+    box-shadow: 0 0 0 0.2rem var(--primary);
+  }
+}
+.big-break {
+  background-color: var(--info);
+
+  button {
+    color: var(--info)
+  }
+  button:hover{
+    box-shadow: 0 0 0 0.2rem var(--info);
+  }
+}
+.work {
+  background-color: var(--success);
+  button:hover{
+    color: var(--success);
+  }
+  button{
+    color: var(--success);
+  }
+}
+
 
 // .settings-button{
 //   position: absolute;

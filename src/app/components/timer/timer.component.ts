@@ -17,13 +17,12 @@ import { TimerService } from 'src/app/services/timer-service/timer.service';
 })
 export class TimerComponent implements OnInit {
   @ViewChild('cd', { static: false }) private countdown: CountdownComponent;
-
   timer?: TimerConfiguration;
   countdown_time: number;
   // State: 1, 3, 5, 7 working
   // State: 2, 4, 6, small break
   // State: 8 big break
-  state: number = 1;
+  state: number = 0;
   autoRestart: boolean = false;
   constructor(private timerService: TimerService) { }
 
@@ -55,32 +54,46 @@ export class TimerComponent implements OnInit {
 
   handleEvent(e: CountdownEvent) {
     console.log('Actions', e);
+
+    if (e.action == "resume") {
+      if (this.state == 0) {
+        this.nextState();
+      }
+    }
+
     if (e.action == "done") {
-      this.countdown_time = this.getCountdownTime()
+      console.log("done")
+      this.nextState();
+      this.countdown_time = this.getCountdown().time;
       this.autoRestart = true;
     }
 
     if(e.action == "restart" && this.autoRestart) {
+      console.log("restart autostart")
       this.countdown.begin();
       this.autoRestart = false;
-    } 
-
-    if (e.action == "restart" && !this.autoRestart) {
-      this.state = 1;
+    } else if(e.action == "restart" && !this.autoRestart) {
+      console.log("war hier");
+      this.state = 0;
+      this.countdown_time = this.getCountdown().time;
     }
   }
 
-  getCountdownTime() {
-    this.state++;
-    if (this.state % 2 == 1) {
-      return this.timer.interval
+  nextState() {
+    this.state = this.state % (this.timer.intervalCount * 2) + 1;
+  }
+
+  getCountdown() {
+    if(this.state == 0) {
+      return {time: this.timer.interval, description: 'idle'} 
+    }else if (this.state % 2 == 1) {
+      return {time: this.timer.interval, description: 'work'}
     }
     else if (this.state < this.timer.intervalCount*2) {
-      return this.timer.smallBreak
+      return {time: this.timer.smallBreak, description: 'small-break'}
     }
     else {
-      this.state = 0;
-      return this.timer.bigBreak
+      return {time: this.timer.bigBreak, description: 'big-break'}
     }
   }
 }

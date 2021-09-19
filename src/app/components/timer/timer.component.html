@@ -1,13 +1,14 @@
 
 <button class="settings-button" mat-icon-button aria-label="Configure Timer"><mat-icon  routerLink="/timer-config">settings</mat-icon></button>
 
-<div class="card-header timer">
+<div class="card-header timer" [ngClass]="getCountdown().description">
     <div class="card-body">
-        <countdown #cd (event)="handleEvent($event)" [config]="{ leftTime: countdown_time , format: 'mm:ss', demand:true }"></countdown>
+        <countdown class="countdown" #cd (event)="handleEvent($event)" [config]="{ leftTime: countdown_time , format: 'mm:ss', demand:true }"></countdown>
         <div class="buttons btn-group">
             <button (click)="cd.resume()" class="btn btn-outline-secondary">go</button>
             <button (click)="cd.pause()" class="btn btn-outline-secondary">pause</button>
             <button (click)="cd.restart()" class="btn btn-outline-secondary">restart</button> 
         </div>
     </div>
+    <div style="font-size: 20px; float: right;">{{getCountdown().description}}</div>
 </div>
