@@ -59,6 +59,7 @@ export class TodoComponent implements OnInit {
     const tomorrow: Date = new Date();
     tomorrow.setSeconds(0);
     tomorrow.setMinutes(0);
+    tomorrow.setUTCHours(0);
     tomorrow.setHours(0);
     tomorrow.setDate(tomorrow.getDate() + 1);
     return tomorrow;
@@ -68,6 +69,7 @@ export class TodoComponent implements OnInit {
     const yesterday: Date = new Date();
     yesterday.setSeconds(0);
     yesterday.setMinutes(0);
+    yesterday.setUTCHours(0);
     yesterday.setHours(0);
     yesterday.setDate(yesterday.getDate() - 1);
     return yesterday;

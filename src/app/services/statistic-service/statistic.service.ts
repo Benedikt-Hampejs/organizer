@@ -18,8 +18,12 @@ export class StatisticService {
 
   constructor(private http: HttpClient, private datePipe: DatePipe) { }
 
-  getStatistic(id: number, url: string): Observable<Statistic> {
-    return this.http.get<Statistic>(url + id);
+  getStatistic(date: Date, url: string): Observable<Statistic[]> {
+    let param = new HttpParams;
+    if (date != null) {
+      param = param.append('start', this.datePipe.transform(date, 'yyyy-MM-dd') + 'T00:00:00.000Z');
+    }
+    return this.http.get<Statistic[]>(url, {params: param});
   }
 
   loadEvents(statisticTyp: string): Observable<Event> {
@@ -29,7 +33,8 @@ export class StatisticService {
 
   saveEvent(statistic: Statistic, url: string) {
     const method = statistic.id ? 'PUT' : 'POST';
-    const id = statistic.id ? statistic.id : ''
+    const id = statistic.id ? statistic.id : '';
+    console.log(statistic, url, method, id);
     return this.http.request(method, url + id, {
       body: statistic
     }).pipe(

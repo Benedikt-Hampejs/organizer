@@ -94,17 +94,26 @@ export class TimerComponent implements OnInit {
       console.log(res)
       event = res[0]
 
-      this.statisticService.getStatistic(+this.datePipe.transform(today, 'yyyyMMdd'),DAY_URL).subscribe(stat => {
+      this.statisticService.getStatistic(today,DAY_URL).subscribe(stat => {
         
-        const statOfToday: Statistic = stat;
-        console.log("Statistic of Today:",statOfToday)
+        var statOfToday: Statistic = stat[0];
+        console.log("Statistic of Today:",statOfToday);
+        if (statOfToday == undefined) statOfToday = {}
+        if (statOfToday.sum == undefined) statOfToday.sum = 0;
+        statOfToday.sum++;
 
-        console.log("TEST")
-        if (stat.sum == undefined) stat.sum = 0;
-        stat.sum++;
+        if (statOfToday.date == undefined) {
+          statOfToday.date = new Date();
+          statOfToday.date.setSeconds(0);
+          statOfToday.date.setMinutes(0);
+          statOfToday.date.setUTCHours(0);
+          statOfToday.date.setUTCMilliseconds(0);
+        } 
 
-        if (stat.statisticPerCategory == undefined) stat.statisticPerCategory = []
-        const catStatArray = stat.statisticPerCategory.filter(s => s.id == event.category);
+        console.log("After Sum:",statOfToday)
+
+        if (statOfToday.statisticPerCategory == undefined) statOfToday.statisticPerCategory = []
+        const catStatArray = statOfToday.statisticPerCategory.filter(s => s.id == event.category);
         var statCategory: StatisticPerCategory;
         if (catStatArray.length != 0) {
           statCategory = catStatArray[0];
@@ -114,10 +123,10 @@ export class TimerComponent implements OnInit {
           catStatArray.push(statCategory)
         } 
         statCategory.count++;
+        statOfToday.statisticPerCategory = catStatArray
+        console.log("After Category:",statOfToday)
 
-        stat.statisticPerCategory = catStatArray
-
-        this.statisticService.saveEvent(stat, DAY_URL).subscribe(res => console.log("Result:", res));
+        this.statisticService.saveEvent(statOfToday, DAY_URL).subscribe(res => console.log("Result:", res));
 
       });
     });

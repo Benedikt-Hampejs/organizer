@@ -254,14 +254,15 @@
   ],
   "statistic_day": [
     {
-      "id": 20210919,
-      "sum": 2,
+      "sum": 5,
+      "date": "2021-09-19T00:00:00.000Z",
       "statisticPerCategory": [
         {
           "id": 5,
-          "count": 2
+          "count": 5
         }
-      ]
+      ],
+      "id": 1
     }
   ]
 }
