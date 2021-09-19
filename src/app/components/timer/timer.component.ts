@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 import { CountdownConfig, CountdownEvent } from 'ngx-countdown';
 
 @Component({
@@ -13,19 +13,20 @@ import { CountdownConfig, CountdownEvent } from 'ngx-countdown';
 })
 export class TimerComponent implements OnInit {
 
+  @Input() countdownStart: number;
   constructor() { }
 
   ngOnInit(): void {
 
   }
-  config: CountdownConfig = {
-    leftTime: 60,
-    format: 'HH:mm:ss',
+  config: any = {
+    leftTime: 0,
+    format: 'mm:ss',
     prettyText: (text) => {
       return text
         .split(':')
         .map((v) => `<span class="item">${v}</span>`)
-        .join('');
+        .join(':');
     },
   };
 
