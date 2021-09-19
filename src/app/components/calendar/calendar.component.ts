@@ -10,6 +10,7 @@ import { Observable, Subject } from 'rxjs';
   selector: 'mwl-demo-component',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: 'calendar.component.html',
+  styleUrls: ['./calendar.component.scss']
 })
 export class CalendarComponent implements OnInit{
   count: Number[];

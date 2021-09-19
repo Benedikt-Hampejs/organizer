@@ -1,8 +1,8 @@
-<mat-toolbar class="mat-elevation-z4" style="position: fixed;z-index: 10;" color="primary" >        
-  Stefan-Organizer  
+<mat-toolbar class="example-header" color="primary" >        
+  Organizer  
 </mat-toolbar>
-<mat-sidenav-container>
-  <mat-sidenav #sidenav mode="side" opened
+<mat-sidenav-container class="example-container">
+  <mat-sidenav class="example-sidenav" #sidenav mode="side" opened
       [fixedInViewport]="true" [fixedTopGap]="60"
       [fixedBottomGap]="0">
       <mat-nav-list>
@@ -15,8 +15,10 @@
   </mat-sidenav>
   <mat-sidenav-content>
     <main [@routeAnimations]="prepareRoute(outlet)" [ngClass]="{'timer-offset': showTimer}">
-      <div *ngIf="showTimer" class="timer">20:00</div>
-      <router-outlet #outlet="outlet" ></router-outlet>
+      <div class="container">
+        <app-timer *ngIf="showTimer"></app-timer>
+        <router-outlet #outlet="outlet" ></router-outlet>
+      </div>
   </main>
 </mat-sidenav-content>
 </mat-sidenav-container>

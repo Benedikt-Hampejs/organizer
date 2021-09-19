@@ -1,10 +1,10 @@
 import { trigger, query, style, transition, animate, animateChild, group } from '@angular/animations';
 
-export const slider =
-trigger('routeAnimations', [
+export const slider = trigger('routeAnimations', [])
+/*trigger('routeAnimations', [
   transition('left => right', slide(false)),
   transition('right => left', slide(true)),
-]);
+])*/;
 
 function slide(leftToRight: boolean) {
   const optional = { optional: true };
