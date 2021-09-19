@@ -1,9 +1,13 @@
-import { CdkConnectedOverlay } from '@angular/cdk/overlay';
-import { Component, OnInit, ChangeDetectionStrategy, Input, ViewChild } from '@angular/core';
-import { relativeTimeThreshold } from 'moment';
-import { CountdownComponent, CountdownConfig, CountdownEvent } from 'ngx-countdown';
+import { DatePipe } from '@angular/common';
+import { Component, OnInit, ChangeDetectionStrategy, ViewChild } from '@angular/core';
+import { CountdownComponent, CountdownEvent } from 'ngx-countdown';
 import { TimerConfiguration } from 'src/app/models/TimerConfiguration';
+import { EventService } from 'src/app/services/event-service/event.service';
+import { StatisticService, DAY_URL, WEEK_URL, MONTH_URL, YEAR_URL } from 'src/app/services/statistic-service/statistic.service';
 import { TimerService } from 'src/app/services/timer-service/timer.service';
+import { Event } from '../../models/Event';
+import { StatisticPerCategory } from 'src/app/models/StatisticPerCategory';
+import { Statistic } from 'src/app/models/Statistic';
 
 @Component({
   selector: 'app-timer',
@@ -24,7 +28,7 @@ export class TimerComponent implements OnInit {
   // State: 8 big break
   state: number = 0;
   autoRestart: boolean = false;
-  constructor(private timerService: TimerService) { }
+  constructor(private timerService: TimerService, private eventService: EventService, private statisticService: StatisticService, private datePipe: DatePipe) { }
 
   ngOnInit(): void {
     this.timerService.loadTimerConfiguration().subscribe(res => {
@@ -63,6 +67,7 @@ export class TimerComponent implements OnInit {
 
     if (e.action == "done") {
       console.log("done")
+      this.updateStatistic()
       this.nextState();
       this.countdown_time = this.getCountdown().time;
       this.autoRestart = true;
@@ -78,22 +83,65 @@ export class TimerComponent implements OnInit {
       this.countdown_time = this.getCountdown().time;
     }
   }
+  updateStatistic() {
+    if (this.getCountdown().description != "work") return;
+
+    var event: Event;
+    const today = new Date()
+    this.eventService.loadEvents(null).subscribe(res => {
+      res = res.filter(a => !a.done).filter(a => new Date(a.start) < today);
+      res = res.sort((a,b) => a.priroty - b.priroty);
+      console.log(res)
+      event = res[0]
+
+      this.statisticService.getStatistic(+this.datePipe.transform(today, 'yyyyMMdd'),DAY_URL).subscribe(stat => {
+        
+        const statOfToday: Statistic = stat;
+        console.log("Statistic of Today:",statOfToday)
+
+        console.log("TEST")
+        if (stat.sum == undefined) stat.sum = 0;
+        stat.sum++;
+
+        if (stat.statisticPerCategory == undefined) stat.statisticPerCategory = []
+        const catStatArray = stat.statisticPerCategory.filter(s => s.id == event.category);
+        var statCategory: StatisticPerCategory;
+        if (catStatArray.length != 0) {
+          statCategory = catStatArray[0];
+        }
+        if (catStatArray.length == 0) {
+          statCategory = {id: event.category, count: 0};
+          catStatArray.push(statCategory)
+        } 
+        statCategory.count++;
+
+        stat.statisticPerCategory = catStatArray
+
+        this.statisticService.saveEvent(stat, DAY_URL).subscribe(res => console.log("Result:", res));
+
+      });
+    });
+    //if (e == undefined) 
+    
+
+    
+  }
 
   nextState() {
-    this.state = this.state % (this.timer.intervalCount * 2) + 1;
+    this.state = this.state % (this.timer?.intervalCount * 2) + 1;
   }
 
   getCountdown() {
     if(this.state == 0) {
-      return {time: this.timer.interval, description: 'idle'} 
+      return {time: this.timer?.interval, description: 'idle'} 
     }else if (this.state % 2 == 1) {
-      return {time: this.timer.interval, description: 'work'}
+      return {time: this.timer?.interval, description: 'work'}
     }
-    else if (this.state < this.timer.intervalCount*2) {
-      return {time: this.timer.smallBreak, description: 'small-break'}
+    else if (this.state < this.timer?.intervalCount*2) {
+      return {time: this.timer?.smallBreak, description: 'small-break'}
     }
     else {
-      return {time: this.timer.bigBreak, description: 'big-break'}
+      return {time: this.timer?.bigBreak, description: 'big-break'}
     }
   }
 }
