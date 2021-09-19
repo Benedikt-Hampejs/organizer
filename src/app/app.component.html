@@ -16,7 +16,7 @@
   <mat-sidenav-content>
     <main [@routeAnimations]="prepareRoute(outlet)" [ngClass]="{'timer-offset': showTimer}">
       <div class="container">
-        <app-timer [ngClass]="{'hide':!showTimer}" [countdownStart]='1200'></app-timer>
+        <app-timer [ngClass]="{'hide':!showTimer}"></app-timer>
         <router-outlet #outlet="outlet" ></router-outlet>
       </div>
   </main>

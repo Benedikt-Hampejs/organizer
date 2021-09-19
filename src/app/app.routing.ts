@@ -3,12 +3,14 @@ import { DashboardComponent} from './components/dashboard/dashboard.component';
 import { TodoComponent} from './components/todo/todo.component';
 import { calendarRoutes, calendarRoutingComponents} from  './components/calendar/calendar.routing';
 import { CategoryComponent } from './components/category/category.component';
+import { TimerConfigComponent } from './components/timer-config/timer-config.component';
 
 const routes: Routes = [
   {path: '', component: DashboardComponent},
-  {path: 'todo', component: TodoComponent, data: {animation: 'left'}},
-  {path: 'category', component: CategoryComponent, data: {animation: 'right'}},
-  {path: 'calender', children: calendarRoutes, data: {animation: 'right'}}
+  {path: 'todo', component: TodoComponent,},
+  {path: 'category', component: CategoryComponent},
+  {path: 'timer-config', component: TimerConfigComponent},
+  {path: 'calender', children: calendarRoutes}
 ];
 
 export const appRouting = RouterModule.forRoot(routes);

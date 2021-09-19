@@ -206,6 +206,14 @@
       "done": false,
       "priroty": 2021080105,
       "id": 24
+    },
+    {
+      "description": "ads",
+      "title": "adsf",
+      "start": "2021-09-18T00:00:00.000Z",
+      "done": false,
+      "priroty": 2021081806,
+      "id": 25
     }
   ],
   "categories": [
@@ -233,6 +241,15 @@
       "category": "Haushalt",
       "color": "#67e3d8",
       "id": 5
+    }
+  ],
+  "timer-configuration": [
+    {
+      "id": 1,
+      "interval": 5,
+      "smallBreak": 2,
+      "bigBreak": 3,
+      "intervalCount": 2
     }
   ]
 }

@@ -1,0 +1,38 @@
+<h1>Timer Configuration</h1>
+<div class="mdc-layout-grid--align-left demo-grid demo-grid--alignment my-4">
+    <div class="mdc-layout-grid__inner">
+        <mat-card class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+            <mat-card-title>
+                <h2>Edit Timer</h2>
+            </mat-card-title>
+            <mat-card-content>
+                <form novalidate #form="ngForm" (ngSubmit)="saveTimerConfiguration()">
+                    <div class="form-group">
+                        <label for="category">Intervall *</label>
+                        <input [(ngModel)]="formTimerConfig.interval" required type="text" class="form-control"
+                            name="interval" placeholder="productive time" style="width: 300px" />
+                    </div>
+                    <div class="form-group">
+                        <label for="category">Small Break *</label>
+                        <input [(ngModel)]="formTimerConfig.smallBreak" required type="text" class="form-control"
+                            name="smallBreak" placeholder="small break" style="width: 300px" />
+                    </div>
+                    <div class="form-group">
+                        <label for="category">Big Break *</label>
+                        <input [(ngModel)]="formTimerConfig.bigBreak" required type="text" class="form-control"
+                            name="bigBreak" placeholder="big break" style="width: 300px" />
+                    </div>
+                    <div class="form-group">
+                        <label for="category">Interval Count *</label>
+                        <input [(ngModel)]="formTimerConfig.intervalCount" required type="text" class="form-control"
+                            name="intervalCount" placeholder="amount of intervals" style="width: 300px" />
+                    </div>
+                    <span>
+                        <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Save</button>
+                    </span>
+                </form>
+                <div class="text-muted mt-3">* kennzeichnet Pflichtfelder</div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

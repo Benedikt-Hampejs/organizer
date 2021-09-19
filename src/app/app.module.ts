@@ -32,6 +32,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { EventService } from './services/event-service/event.service';
 import { CategoryService } from './services/category-service/category.service';
+import { TimerService } from './services/timer-service/timer.service';
 import { HttpClientModule} from '@angular/common/http';
 import { EventDetailComponent } from './components/event-detail/event-detail.component';
 import { CategoryComponent } from './components/category/category.component';
@@ -40,6 +41,7 @@ import { ColorPickerModule } from 'ngx-color-picker';
 import { TimerComponent } from './components/timer/timer.component';
 import { AnimateAlertDirective } from './directives/animate-alert.directive';
 import { CountdownModule } from 'ngx-countdown';
+import { TimerConfigComponent } from './components/timer-config/timer-config.component';
 
 
 
@@ -53,6 +55,7 @@ import { CountdownModule } from 'ngx-countdown';
     CategoryComponent,
     TimerComponent,
     AnimateAlertDirective,
+    TimerConfigComponent,
   ],
   imports: [
     appRouting,

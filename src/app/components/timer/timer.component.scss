@@ -25,3 +25,17 @@
     background-color: var(--secondary);
   }
 }
+
+// .settings-button{
+//   position: absolute;
+//   color: white
+// }
+
+.settings-button{
+  position: absolute;
+  color: white
+}
+
+.settings-button:hover{
+  color: #eee;
+}

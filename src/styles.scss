@@ -19,9 +19,7 @@ $theme-colors: (
   light: $gray-100,
   dark: $gray-800
 );
-mat-icon:hover {
-  color: $prmiary !important;
-}
+
 
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';
