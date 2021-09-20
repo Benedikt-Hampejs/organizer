@@ -15,7 +15,8 @@
     </div>
     <div class="col-lg-6">
         <h2>Piechart</h2> 
-        <canvas baseChart 
+        <canvas baseChart       
+        [colors]="pieColors"
         [data]="pieChartData" 
         [labels]="pieChartLabels" 
         [chartType]="pieChartType"

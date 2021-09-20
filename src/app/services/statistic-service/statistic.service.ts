@@ -21,7 +21,7 @@ export class StatisticService {
   getStatistic(date: Date, url: string): Observable<Statistic[]> {
     let param = new HttpParams;
     if (date != null) {
-      param = param.append('start', this.datePipe.transform(date, 'yyyy-MM-dd') + 'T00:00:00.000Z');
+      param = param.append('date', this.datePipe.transform(date, 'yyyy-MM-dd') + 'T00:00:00.000Z');
     }
     return this.http.get<Statistic[]>(url, {params: param});
   }

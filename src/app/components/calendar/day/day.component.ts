@@ -36,7 +36,6 @@ export class DayComponent implements OnInit, OnDestroy {
     this.day = new Date(dateString);
     this.date = new FormControl(this.day);
     if(eventId != null) {
-      console.log(eventId);
       this.eventService.getEvent(eventId).subscribe(e => this.formEvent = e);
     }
     this.events$ = this.eventService.loadEvents(this.day);
@@ -45,11 +44,9 @@ export class DayComponent implements OnInit, OnDestroy {
       if(e.length > 0) {
         this.highestPriority = e[e.length -1].priroty;
       }
-      console.log("priority " + this.highestPriority);
     });
     this.eventChangeSubscription = this.eventService.eventChanged$.subscribe(changedEvent => {
       this.events$ = this.eventService.loadEvents(this.day);
-      console.log(changedEvent.id);
     })
   }
 
@@ -67,7 +64,6 @@ export class DayComponent implements OnInit, OnDestroy {
 
 
 
-    console.log(this.day.getDay(), this.highestPriority);
     this.eventService.saveEvent(this.formEvent).subscribe();
     this.formEvent = {}
     this.date = new FormControl(this.day);

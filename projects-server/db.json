@@ -129,7 +129,7 @@
       "category": 3,
       "start": "2021-09-19T00:00:00.000Z",
       "done": false,
-      "priroty": 2021082005,
+      "priroty": 2021082002,
       "id": 16
     },
     {
@@ -137,7 +137,7 @@
       "description": "fds",
       "start": "2021-09-18T00:00:00.000Z",
       "done": false,
-      "priroty": 2021082003,
+      "priroty": 2021082004,
       "id": 17,
       "end": null,
       "category": 5
@@ -148,7 +148,7 @@
       "category": 1,
       "start": "2021-09-18T00:00:00.000Z",
       "done": false,
-      "priroty": 2021082002,
+      "priroty": 2021082003,
       "id": 18,
       "end": null
     },
@@ -177,7 +177,7 @@
       "category": 1,
       "start": "2021-09-01T00:00:00.000Z",
       "done": false,
-      "priroty": 2021082004,
+      "priroty": 2021082005,
       "id": 21
     },
     {
@@ -254,15 +254,65 @@
   ],
   "statistic_day": [
     {
-      "sum": 8,
-      "date": "2021-09-19T00:00:00.000Z",
+      "sum": 20,
+      "date": "2021-09-17T00:00:00.000Z",
       "statisticPerCategory": [
         {
           "id": 2,
-          "count": 5
+          "count": 1
+        },
+        {
+          "id": 5,
+          "count": 2
+        },
+        {
+          "id": 1,
+          "count": 3
         }
       ],
       "id": 1
+    },
+    {
+      "sum": 20,
+      "date": "2021-09-18T00:00:00.000Z",
+      "statisticPerCategory": [
+        {
+          "id": 2,
+          "count": 9
+        },
+        {
+          "id": 5,
+          "count": 3
+        },
+        {
+          "id": 1,
+          "count": 2
+        }
+      ],
+      "id": 1
+    },
+    {
+      "sum": 109,
+      "date": "2021-09-20T00:00:00.000Z",
+      "statisticPerCategory": [
+        {
+          "id": 1,
+          "count": 2
+        },
+        {
+          "id": 5,
+          "count": 3
+        },
+        {
+          "id": 2,
+          "count": 57
+        },
+        {
+          "id": 3,
+          "count": 47
+        }
+      ],
+      "id": 2
     }
   ]
 }

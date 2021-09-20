@@ -19,7 +19,6 @@ export class AppComponent {
   }
  
   public onRouterOutletActivate(event : any) {
-    console.log(event);
 }
 
 

@@ -36,7 +36,6 @@ export class TimerComponent implements OnInit {
       this.countdown_time = this.timer.interval;
     })
     this.timerService.timerChanged$.subscribe(_ => {
-      console.log("Timer Changed");
       this.timerService.loadTimerConfiguration().subscribe(res => {
         this.timer = res;
         this.countdown_time = this.timer.interval;
@@ -57,7 +56,6 @@ export class TimerComponent implements OnInit {
   };
 
   handleEvent(e: CountdownEvent) {
-    console.log('Actions', e);
 
     if (e.action == "resume") {
       if (this.state == 0) {
@@ -66,7 +64,6 @@ export class TimerComponent implements OnInit {
     }
 
     if (e.action == "done") {
-      console.log("done")
       this.updateStatistic()
       this.nextState();
       this.countdown_time = this.getCountdown().time;
@@ -74,11 +71,9 @@ export class TimerComponent implements OnInit {
     }
 
     if(e.action == "restart" && this.autoRestart) {
-      console.log("restart autostart")
       this.countdown.begin();
       this.autoRestart = false;
     } else if(e.action == "restart" && !this.autoRestart) {
-      console.log("war hier");
       this.state = 0;
       this.countdown_time = this.getCountdown().time;
     }
@@ -91,13 +86,10 @@ export class TimerComponent implements OnInit {
     this.eventService.loadEvents(null).subscribe(res => {
       res = res.filter(a => !a.done).filter(a => new Date(a.start) < today);
       res = res.sort((a,b) => a.priroty - b.priroty);
-      console.log(res)
       event = res[0]
 
       this.statisticService.getStatistic(today,DAY_URL).subscribe(stat => {
-        
         var statOfToday: Statistic = stat[0];
-        console.log("Statistic of Today:",statOfToday);
         if (statOfToday == undefined) statOfToday = {}
         if (statOfToday.sum == undefined) statOfToday.sum = 0;
         statOfToday.sum++;
@@ -110,21 +102,19 @@ export class TimerComponent implements OnInit {
           statOfToday.date.setUTCMilliseconds(0);
         } 
 
-        console.log("After Sum:",statOfToday)
 
         if (statOfToday.statisticPerCategory == undefined) statOfToday.statisticPerCategory = []
         const catStatArray = statOfToday.statisticPerCategory.filter(s => s.id == event.category);
         var statCategory: StatisticPerCategory;
         if (catStatArray.length != 0) {
+          //there are categories
           statCategory = catStatArray[0];
         }
         if (catStatArray.length == 0) {
           statCategory = {id: event.category, count: 0};
-          catStatArray.push(statCategory)
+          statOfToday.statisticPerCategory.push(statCategory);
         } 
         statCategory.count++;
-        statOfToday.statisticPerCategory = catStatArray
-        console.log("After Category:",statOfToday)
 
         this.statisticService.saveStatistic(statOfToday, DAY_URL).subscribe(res => console.log("Result:", res));
 
