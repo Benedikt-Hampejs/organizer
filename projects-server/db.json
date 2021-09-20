@@ -6,7 +6,7 @@
       "category": 3,
       "start": "2021-09-17T00:00:00.000Z",
       "done": false,
-      "priroty": 2021081908,
+      "priroty": 2021082010,
       "id": 3,
       "end": null
     },
@@ -102,7 +102,7 @@
       "category": 1,
       "start": "2021-09-13T00:00:00.000Z",
       "done": false,
-      "priroty": 2021081909,
+      "priroty": 2021082011,
       "id": 13
     },
     {
@@ -111,7 +111,7 @@
       "category": 1,
       "start": "2021-09-19T00:00:00.000Z",
       "done": false,
-      "priroty": 2021081911,
+      "priroty": 2021082013,
       "id": 14
     },
     {
@@ -120,7 +120,7 @@
       "category": 2,
       "start": "2021-09-19T00:00:00.000Z",
       "done": false,
-      "priroty": 2021081912,
+      "priroty": 2021082000,
       "id": 15
     },
     {
@@ -129,7 +129,7 @@
       "category": 3,
       "start": "2021-09-19T00:00:00.000Z",
       "done": false,
-      "priroty": 2021081913,
+      "priroty": 2021082005,
       "id": 16
     },
     {
@@ -137,7 +137,7 @@
       "description": "fds",
       "start": "2021-09-18T00:00:00.000Z",
       "done": false,
-      "priroty": 2021081901,
+      "priroty": 2021082003,
       "id": 17,
       "end": null,
       "category": 5
@@ -148,7 +148,7 @@
       "category": 1,
       "start": "2021-09-18T00:00:00.000Z",
       "done": false,
-      "priroty": 2021081902,
+      "priroty": 2021082002,
       "id": 18,
       "end": null
     },
@@ -158,7 +158,7 @@
       "category": 5,
       "start": "2021-09-18T00:00:00.000Z",
       "done": false,
-      "priroty": 2021081900,
+      "priroty": 2021082001,
       "id": 19,
       "end": null
     },
@@ -168,7 +168,7 @@
       "category": 1,
       "start": "2021-09-01T00:00:00.000Z",
       "done": false,
-      "priroty": 2021081904,
+      "priroty": 2021082006,
       "id": 20
     },
     {
@@ -177,7 +177,7 @@
       "category": 1,
       "start": "2021-09-01T00:00:00.000Z",
       "done": false,
-      "priroty": 2021081903,
+      "priroty": 2021082004,
       "id": 21
     },
     {
@@ -186,7 +186,7 @@
       "category": 1,
       "start": "2021-09-01T00:00:00.000Z",
       "done": false,
-      "priroty": 2021081905,
+      "priroty": 2021082007,
       "id": 22
     },
     {
@@ -195,7 +195,7 @@
       "category": 1,
       "start": "2021-09-01T00:00:00.000Z",
       "done": false,
-      "priroty": 2021081906,
+      "priroty": 2021082008,
       "id": 23
     },
     {
@@ -204,7 +204,7 @@
       "category": 1,
       "start": "2021-09-01T00:00:00.000Z",
       "done": false,
-      "priroty": 2021081907,
+      "priroty": 2021082009,
       "id": 24
     },
     {
@@ -212,7 +212,7 @@
       "title": "adsf",
       "start": "2021-09-18T00:00:00.000Z",
       "done": false,
-      "priroty": 2021081910,
+      "priroty": 2021082012,
       "id": 25
     }
   ],
@@ -254,11 +254,11 @@
   ],
   "statistic_day": [
     {
-      "sum": 5,
+      "sum": 8,
       "date": "2021-09-19T00:00:00.000Z",
       "statisticPerCategory": [
         {
-          "id": 5,
+          "id": 2,
           "count": 5
         }
       ],

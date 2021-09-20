@@ -126,7 +126,7 @@ export class TimerComponent implements OnInit {
         statOfToday.statisticPerCategory = catStatArray
         console.log("After Category:",statOfToday)
 
-        this.statisticService.saveEvent(statOfToday, DAY_URL).subscribe(res => console.log("Result:", res));
+        this.statisticService.saveStatistic(statOfToday, DAY_URL).subscribe(res => console.log("Result:", res));
 
       });
     });

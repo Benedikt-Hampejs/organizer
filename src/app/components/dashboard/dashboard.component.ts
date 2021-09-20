@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import { Label, Color, SingleDataSet,  monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip } from 'ng2-charts';
+import { DAY_URL, StatisticService } from 'src/app/services/statistic-service/statistic.service';
+import { Statistic } from 'src/app/models/Statistic';
+import { DatePipe } from '@angular/common';
+import { CategoryService } from 'src/app/services/category-service/category.service';
+import { StatisticPerCategory } from 'src/app/models/StatisticPerCategory';
 
 
 @Component({
@@ -10,27 +15,31 @@ import { Label, Color, SingleDataSet,  monkeyPatchChartJsLegend, monkeyPatchChar
 })
 export class DashboardComponent implements OnInit {
 
+  stats: Statistic = {};
+
   public barChartOptions: ChartOptions = {
     responsive: true,
   };
-  public barChartLabels: Label[] = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
+  public barChartLabels: Label[] = [];
   public barChartType: ChartType = 'bar';
   public barChartLegend = true;
   public barChartPlugins = [];
 
-  public barChartData: ChartDataSets[] = [
-    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
-    { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' },
-    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series C' },
-    { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series D' },
-    { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series E' },
-    { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series F' }
-  ];
+  // public barChartData: ChartDataSets[] = [
+  //   { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
+  //   { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' },
+  //   { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series C' },
+  //   { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series D' },
+  //   { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series E' },
+  //   { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series F' }
+  // ];
+  public barChartData: ChartDataSets[] = []
   
-  public lineChartData: ChartDataSets[] = [
-    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A', lineTension:0 },
-  ];
-  public lineChartLabels: Label[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+  // public lineChartData: ChartDataSets[] = [
+  //   { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A', lineTension:0 },
+  // ];
+  public lineChartData: ChartDataSets[] = [ {data:[], label: 'Finished work units per day', lineTension:0}]
+  public lineChartLabels: Label[] = [];
   public lineChartOptions: (ChartOptions & { annotation: any }) = {
     responsive: true,
     annotation: null
@@ -55,11 +64,39 @@ export class DashboardComponent implements OnInit {
   public pieChartLegend = true;
   public pieChartPlugins = [];
 
-  constructor() { 
+  constructor(private statisticService: StatisticService, private categoryService: CategoryService, private datePipe: DatePipe) { 
     monkeyPatchChartJsTooltip();
     monkeyPatchChartJsLegend();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.statisticService.loadStatistic(DAY_URL).subscribe(res => {
 
+      res.forEach(day => {
+        this.lineChartData[0].data.push(day.sum);
+        this.lineChartLabels.push(this.datePipe.transform(day.date,'dd.MM'));
+        this.barChartLabels.push(this.datePipe.transform(day.date,'dd.MM'));
+      })
+      this.barChartData = []
+      console.log("<->",this.barChartData)
+      
+      this.categoryService.loadCategory().subscribe(catList => {
+        
+        catList.forEach(category => {
+          const chartDataSets: ChartDataSets = {data:[], label: category.category, backgroundColor: category.color};
+          res.forEach(day => {
+            const  statisticPerCategoryList: StatisticPerCategory[] = day.statisticPerCategory.filter(statPerDay => statPerDay.id == category.id);
+            if (statisticPerCategoryList.length > 0) {
+              chartDataSets.data.push(statisticPerCategoryList[0].count);
+            }
+          })
+          console.log("CharDataSet:",chartDataSets)
+          this.barChartData.push(chartDataSets);
+        })      
+      })
+
+      
+
+    })
+  }
 }

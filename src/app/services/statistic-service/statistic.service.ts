@@ -26,12 +26,11 @@ export class StatisticService {
     return this.http.get<Statistic[]>(url, {params: param});
   }
 
-  loadEvents(statisticTyp: string): Observable<Event> {
-    const url = this.getUrl(statisticTyp);
-    return this.http.get<Event>(url);
+  loadStatistic(url: string): Observable<Statistic[]> {
+    return this.http.get<Statistic[]>(url);
   }
 
-  saveEvent(statistic: Statistic, url: string) {
+  saveStatistic(statistic: Statistic, url: string) {
     const method = statistic.id ? 'PUT' : 'POST';
     const id = statistic.id ? statistic.id : '';
     console.log(statistic, url, method, id);
@@ -42,12 +41,4 @@ export class StatisticService {
         this.statisticChanged$.next(savedStatistic)
       }));
   }
-
-  getUrl(statistic: string): string {
-    if (statistic == 'day') return DAY_URL;
-    else if (statistic == 'week') return WEEK_URL;
-    else if (statistic == 'month') return MONTH_URL;
-    else return YEAR_URL;
-  }
-
 }
