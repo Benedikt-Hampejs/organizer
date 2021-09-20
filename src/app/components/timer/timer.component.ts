@@ -64,6 +64,7 @@ export class TimerComponent implements OnInit {
     }
 
     if (e.action == "done") {
+      this.playAudio();
       this.updateStatistic()
       this.nextState();
       this.countdown_time = this.getCountdown().time;
@@ -78,6 +79,13 @@ export class TimerComponent implements OnInit {
       this.countdown_time = this.getCountdown().time;
     }
   }
+  private playAudio() {
+    let audio: HTMLAudioElement = new Audio();
+    audio.src = 'assets/mp3/toast_sound.mp3';
+    audio.load();
+    audio.play();
+  }
+
   updateStatistic() {
     if (this.getCountdown().description != "work") return;
 
