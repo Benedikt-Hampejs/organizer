@@ -10,7 +10,7 @@ export class Alert {
 
 export const ALERTS: Alert[] = [{
     type: 'success',
-    message: 'This is an success alert',
+    message: 'Successfully saved',
   }, {
     type: 'info',
     message: 'This is an info alert',

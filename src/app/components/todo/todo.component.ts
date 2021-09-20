@@ -48,7 +48,7 @@ export class TodoComponent implements OnInit {
       })
     });
 
-    this.activeRoute.params.subscribe((params) => { console.log(params) });
+    this.activeRoute.params.subscribe();
     this.categoryService.loadCategory().subscribe(c => this.categories = c);
   }
 
@@ -77,7 +77,6 @@ export class TodoComponent implements OnInit {
 
   drop(event: CdkDragDrop<Event[]>) {
     if (event.previousContainer === event.container) {
-      console.log("prev" + event.previousIndex, " current", event.currentIndex)
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
       transferArrayItem(event.previousContainer.data,
@@ -102,19 +101,22 @@ export class TodoComponent implements OnInit {
   showEvent(event: Event) {
     if (!this.showEventDetail || this.clickedEvent.id !== event.id) {
       this.showEventDetail = true;
-      console.log("show");
     } else {
       this.showEventDetail = false;
-      console.log("hide");
     }
     this.clickedEvent = event;
   }
 
   getColorByEvent(category: number): String {
-    if (category == undefined) {
+    if (category == undefined || this.categories == undefined) {
       return '#3f51b5';
     }
-    return this.categories.filter(c => c.id === category)[0].color;
+      const catsFiltered:Category[]  = this.categories.filter(c => c.id === category)
+      if(catsFiltered.length > 0) {
+        return catsFiltered[0].color;
+      } else {
+        return '#3f51b5';
+      }
   }
 
 }

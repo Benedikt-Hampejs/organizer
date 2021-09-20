@@ -22,7 +22,7 @@ import { Statistic } from 'src/app/models/Statistic';
 export class TimerComponent implements OnInit {
   @ViewChild('cd', { static: false }) private countdown: CountdownComponent;
   timer?: TimerConfiguration;
-  countdown_time: number;
+  countdown_time: number = 1;//fix undefined error
   // State: 1, 3, 5, 7 working
   // State: 2, 4, 6, small break
   // State: 8 big break
@@ -116,7 +116,7 @@ export class TimerComponent implements OnInit {
         } 
         statCategory.count++;
 
-        this.statisticService.saveStatistic(statOfToday, DAY_URL).subscribe(res => console.log("Result:", res));
+        this.statisticService.saveStatistic(statOfToday, DAY_URL).subscribe();
 
       });
     });

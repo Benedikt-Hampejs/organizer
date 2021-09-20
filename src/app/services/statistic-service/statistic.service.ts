@@ -33,7 +33,6 @@ export class StatisticService {
   saveStatistic(statistic: Statistic, url: string) {
     const method = statistic.id ? 'PUT' : 'POST';
     const id = statistic.id ? statistic.id : '';
-    console.log(statistic, url, method, id);
     return this.http.request(method, url + id, {
       body: statistic
     }).pipe(
