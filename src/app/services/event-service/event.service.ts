@@ -4,10 +4,11 @@ import { Observable, BehaviorSubject, fromEvent, Subject } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
 import { map, tap } from 'rxjs/internal/operators';
 import { DatePipe } from '@angular/common'
+import { environment } from '../../../environments/environment';
 
 
 
-const BASE_URL = 'http://localhost:3000/api/events/';
+const BASE_URL = environment.apiURL + 'events/';
 @Injectable()
 export class EventService {
   eventChanged$ = new Subject<Event>();
@@ -22,6 +23,7 @@ export class EventService {
   }
 
   loadEvents(day: Date): Observable<Event[]> {
+    console.log(BASE_URL);
     let param = new HttpParams;
     if (day != null) {
       param = param.append('start', this.datePipe.transform(day, 'yyyy-MM-dd') + 'T00:00:00.000Z');

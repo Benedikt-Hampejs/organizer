@@ -3,8 +3,9 @@ import { Injectable } from "@angular/core";
 import { Observable, Subject } from "rxjs";
 import { tap } from "rxjs/internal/operators";
 import { Category } from "src/app/models/Category";
+import { environment } from '../../../environments/environment';
 
-const BASE_URL = 'http://localhost:3000/api/categories/';
+const BASE_URL = environment.apiURL + 'categories/';
 @Injectable()
 export class CategoryService {
   categoryChanged$ = new Subject<Category>();

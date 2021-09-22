@@ -3,8 +3,10 @@ import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { tap } from 'rxjs/internal/operators';
 import { TimerConfiguration } from 'src/app/models/TimerConfiguration';
+import { environment } from '../../../environments/environment';
 
-const BASE_URL = 'http://localhost:3000/api/timer-configuration/';
+const BASE_URL = environment.apiURL + 'timer-configuration/';
+
 const TIMER_ID = 1;
 @Injectable({
   providedIn: 'root'
