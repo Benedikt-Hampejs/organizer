@@ -97,6 +97,7 @@ export class TimerComponent implements OnInit {
       event = res[0]
 
       this.statisticService.getStatistic(today,DAY_URL).subscribe(stat => {
+        console.log(stat);
         var statOfToday: Statistic = stat[0];
         if (statOfToday == undefined) statOfToday = {}
         if (statOfToday.sum == undefined) statOfToday.sum = 0;

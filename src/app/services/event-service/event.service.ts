@@ -23,7 +23,6 @@ export class EventService {
   }
 
   loadEvents(day: Date): Observable<Event[]> {
-    console.log(BASE_URL);
     let param = new HttpParams;
     if (day != null) {
       param = param.append('start', this.datePipe.transform(day, 'yyyy-MM-dd') + 'T00:00:00.000Z');

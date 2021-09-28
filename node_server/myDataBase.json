@@ -1,0 +1,16 @@
+{
+    "events": [
+    ],
+    "category": [
+    ],
+    "categories": [
+    ],
+    "timerConfiguration": {
+        "interval": "5",
+        "smallBreak": 2,
+        "bigBreak": 3,
+        "intervalCount": 2
+    },
+    "statisticDays": [
+    ]
+}

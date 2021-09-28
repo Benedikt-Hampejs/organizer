@@ -22,9 +22,7 @@ export class CalendarComponent implements OnInit{
     this.eventService.loadEvents(null).subscribe(res => {
       res.forEach(x => {
         var ev: Event = {
-          start: new Date(x.start),
-          title: x.title,
-          description: x.description
+          start: new Date(x.start)
         } 
         this.events.push(ev)
       })

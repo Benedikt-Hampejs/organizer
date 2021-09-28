@@ -7,7 +7,6 @@ import { environment } from '../../../environments/environment';
 
 const BASE_URL = environment.apiURL + 'timer-configuration/';
 
-const TIMER_ID = 1;
 @Injectable({
   providedIn: 'root'
 })
@@ -17,11 +16,11 @@ export class TimerService {
   constructor(private http: HttpClient) { }
 
   loadTimerConfiguration(): Observable<TimerConfiguration> {
-    return this.http.get<TimerConfiguration>(BASE_URL + TIMER_ID);
+    return this.http.get<TimerConfiguration>(BASE_URL);
   }
 
   saveTimerConfiguration(timer: TimerConfiguration) {
-    return this.http.request('PUT', BASE_URL + TIMER_ID, {
+    return this.http.request('PUT', BASE_URL, {
       body: timer
     }).pipe(tap(savedTimer => {
       this.timerChanged$.next(savedTimer);
