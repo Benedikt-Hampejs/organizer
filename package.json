@@ -4,7 +4,7 @@
   "scripts": {
     "postinstall": "npm run install-server",
     "ng": "ng",
-    "start": "concurrently \"node projects-server/server.js db=projects-server/db.json\" \"ng serve\" ",
+    "start": "concurrently \"node node_server/organizer.js\" \"ng serve\" ",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",

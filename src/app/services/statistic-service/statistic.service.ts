@@ -20,12 +20,14 @@ export class StatisticService {
 
   constructor(private http: HttpClient, private datePipe: DatePipe) { }
 
-  getStatistic(date: Date, url: string): Observable<Statistic[]> {
-    let param = new HttpParams;
-    if (date != null) {
-      param = param.append('date', this.datePipe.transform(date, 'yyyy-MM-dd') + 'T00:00:00.000Z');
-    }
-    return this.http.get<Statistic[]>(url, {params: param});
+  getStatistic(date: Date, url: string): Observable<Statistic> {
+
+    // let param = new HttpParams;
+    // if (date != null) {
+    //   param = param.append('date', this.datePipe.transform(date, 'yyyy-MM-dd') + 'T00:00:00.000Z');
+    // }
+    const statDate = this.datePipe.transform(date, 'yyyy-MM-dd') + 'T00:00:00.000Z'
+    return this.http.get<Statistic>(url + statDate);
   }
 
   loadStatistic(url: string): Observable<Statistic[]> {
@@ -33,9 +35,10 @@ export class StatisticService {
   }
 
   saveStatistic(statistic: Statistic, url: string) {
-    const method = statistic.id ? 'PUT' : 'POST';
-    const id = statistic.id ? statistic.id : '';
-    return this.http.request(method, url + id, {
+    console.log("saveStatistic",statistic)
+    const method = statistic.sum == 1 ? 'POST' : 'PUT';
+    const date = statistic.sum == 1 ?  '' : this.datePipe.transform(statistic.date, 'yyyy-MM-dd') + 'T00:00:00.000Z';
+    return this.http.request(method, url + date, {
       body: statistic
     }).pipe(
       tap(savedStatistic=> {

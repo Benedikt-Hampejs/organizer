@@ -133,7 +133,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
           //(<string[]> this.pieColors[0].backgroundColor).push(category.color);
           this.barChartData.push(chartDataSets);
         });
-        console.log(this.barChartData);
       });
     });
   }

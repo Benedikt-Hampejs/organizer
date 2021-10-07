@@ -1,16 +1,50 @@
 {
     "events": [
-    ],
-    "category": [
+        {
+            "title": "adsf",
+            "description": "adfs",
+            "category": 1,
+            "start": "2021-10-05T00:00:00.000Z",
+            "done": false,
+            "priroty": 2021090501,
+            "id": 1
+        }
     ],
     "categories": [
+        {
+            "color": "#974e4e",
+            "category": "adsf",
+            "id": 1
+        }
+    ],
+    "statisticDays": [
+        {
+            "sum": 2,
+            "date": "2021-10-04T00:00:00.000Z",
+            "statisticPerCategory": [
+                {
+                    "id": 1,
+                    "count": 2
+                }
+            ],
+            "id": 1
+        },
+        {
+            "sum": 1,
+            "date": "2021-10-07T00:00:00.000Z",
+            "statisticPerCategory": [
+                {
+                    "id": 1,
+                    "count": 1
+                }
+            ],
+            "id": 2
+        }
     ],
     "timerConfiguration": {
         "interval": "5",
-        "smallBreak": 2,
-        "bigBreak": 3,
-        "intervalCount": 2
-    },
-    "statisticDays": [
-    ]
+        "smallBreak": "1",
+        "bigBreak": "1",
+        "intervalCount": "1"
+    }
 }

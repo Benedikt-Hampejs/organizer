@@ -120,7 +120,7 @@
       "category": 2,
       "start": "2021-09-19T00:00:00.000Z",
       "done": false,
-      "priroty": 2021082000,
+      "priroty": 2021082001,
       "id": 15
     },
     {
@@ -129,7 +129,7 @@
       "category": 3,
       "start": "2021-09-19T00:00:00.000Z",
       "done": false,
-      "priroty": 2021082002,
+      "priroty": 2021082005,
       "id": 16
     },
     {
@@ -137,7 +137,7 @@
       "description": "fds",
       "start": "2021-09-18T00:00:00.000Z",
       "done": false,
-      "priroty": 2021082004,
+      "priroty": 2021082003,
       "id": 17,
       "end": null,
       "category": 5
@@ -148,7 +148,7 @@
       "category": 1,
       "start": "2021-09-18T00:00:00.000Z",
       "done": false,
-      "priroty": 2021082003,
+      "priroty": 2021082002,
       "id": 18,
       "end": null
     },
@@ -158,7 +158,7 @@
       "category": 5,
       "start": "2021-09-18T00:00:00.000Z",
       "done": false,
-      "priroty": 2021082001,
+      "priroty": 2021082000,
       "id": 19,
       "end": null
     },
@@ -177,7 +177,7 @@
       "category": 1,
       "start": "2021-09-01T00:00:00.000Z",
       "done": false,
-      "priroty": 2021082005,
+      "priroty": 2021082004,
       "id": 21
     },
     {
@@ -219,7 +219,7 @@
   "categories": [
     {
       "category": "Master1",
-      "color": "#c2c2c2",
+      "color": "#6b906a",
       "id": 1
     },
     {
@@ -246,70 +246,35 @@
   "timer-configuration": [
     {
       "id": 1,
-      "interval": 5,
-      "smallBreak": 2,
-      "bigBreak": 3,
-      "intervalCount": 2
+      "interval": 1500,
+      "smallBreak": 300,
+      "bigBreak": 1200,
+      "intervalCount": 4
     }
   ],
   "statistic_day": [
     {
-      "sum": 20,
-      "date": "2021-09-17T00:00:00.000Z",
+      "sum": 8,
+      "date": "2021-09-19T00:00:00.000Z",
       "statisticPerCategory": [
         {
           "id": 2,
-          "count": 1
-        },
-        {
-          "id": 5,
-          "count": 2
-        },
-        {
-          "id": 1,
-          "count": 3
+          "count": 5
         }
       ],
       "id": 1
     },
     {
-      "sum": 20,
-      "date": "2021-09-18T00:00:00.000Z",
-      "statisticPerCategory": [
-        {
-          "id": 2,
-          "count": 9
-        },
-        {
-          "id": 5,
-          "count": 3
-        },
-        {
-          "id": 1,
-          "count": 2
-        }
-      ],
-      "id": 1
-    },
-    {
-      "sum": 114,
+      "sum": 3,
       "date": "2021-09-20T00:00:00.000Z",
       "statisticPerCategory": [
         {
-          "id": 1,
+          "id": 2,
           "count": 2
         },
         {
           "id": 5,
-          "count": 3
-        },
-        {
-          "id": 2,
-          "count": 62
-        },
-        {
-          "id": 3,
-          "count": 47
+          "count": 1
         }
       ],
       "id": 2
