@@ -179,15 +179,15 @@ function saveNewElement(path, req, res) {
   return res.json(req.body);
 }
 
-// const appAngular = express();
-// const port = 3100;
+const appAngular = express();
+const port = 3100;
 
-// const dir = 'C:/Users/Stefan Hampejs/Documents/git'
-// //const dir = '/home/node/organizer';
-// appAngular.use(express.static(dir + '/organizer'));
-// appAngular.all('*', (req, res) => {
-//   res.status(200).sendFile(dir + '/organizer/index.html');
-// });
-// appAngular.listen(port, () => {
-//   console.log(`Example app listening at http://localhost:${port}`);
-// });
+const dir = 'C:/Users/Stefan Hampejs/Documents/git'
+//const dir = '/home/node/organizer';
+appAngular.use(express.static(dir + '/organizer'));
+appAngular.all('*', (req, res) => {
+  res.status(200).sendFile(dir + '/organizer/index.html');
+});
+appAngular.listen(port, () => {
+  console.log(`Example app listening at http://localhost:${port}`);
+});

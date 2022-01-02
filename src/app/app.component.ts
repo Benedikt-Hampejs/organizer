@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { slider} from './animations'
+import { slider } from './animations'
 
 @Component({
   selector: 'app-root',
@@ -11,16 +11,20 @@ import { slider} from './animations'
   ]
 })
 export class AppComponent {
-  title = 'stefan-organizer';
+  title = 'organizer';
   showTimer: boolean = false;
 
   prepareRoute(outlet: RouterOutlet) {
     return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
   }
- 
-  public onRouterOutletActivate(event : any) {
-}
 
+  public onRouterOutletActivate(event: any) {
+  }
+
+  public isBigScreen() {
+    const vh = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
+    return vh > 768;
+  }
 
 }
 

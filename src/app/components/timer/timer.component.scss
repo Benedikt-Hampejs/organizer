@@ -1,5 +1,4 @@
 .timer {
-
     max-width: 1200px;
     background-color: var(--primary);
     color: white;
@@ -8,7 +7,6 @@
 .countdown {
   font-size: 150px;
   line-height: 190px;
-
 }
 .buttons {
   font-size: 20px;
@@ -22,8 +20,18 @@
     margin-left: 3px;
     margin-right:3px;
   }
+
   button:hover {
     background-color: var(--secondary);
+  }
+}
+@media (max-device-width: 768px) {
+  .countdown {
+    font-size: 100px;
+    line-height: 110px;
+  }
+  .buttons button {
+    width: 80px;
   }
 }
 
@@ -58,12 +66,6 @@
     color: var(--success);
   }
 }
-
-
-// .settings-button{
-//   position: absolute;
-//   color: white
-// }
 
 .settings-button{
   position: absolute;

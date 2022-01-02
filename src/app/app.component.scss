@@ -29,56 +29,9 @@
   display: none;
 }
 
-
-/*mat-sidenav-content {
-    width: 100%;
-    overflow: hidden;
-    position: initial;
-
-    main {
-      position: relative;
-      top: 20px;
-      left: 30px;
-      ::ng-deep & router-outlet + *{
-        position: fixed;
-        left: 220px;
-        height: 100%;
-        max-width: 1200px;
-        width: calc(100% - 250px);
-      }
-    }
-    .timer-offset {
-      top:220px;
-    }
+@media (min-device-width: 768px) { 
+  .menu_button {
+    display: none;
   }
-  
-  mat-sidenav-container {
-    display: flex;
-    position: absolute;
-    top: 62px;
-    left: 0;
-    right: 0;
-  }
-  
-  mat-sidenav{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 200px;
-  }
-  .timer {
-    position:fixed;
-    top:70px;
-    height: 200px;
-    width: calc(90% - 200px);
-    max-width: 1100px;
-    min-width: 300px;
-    background-color: var(--primary);
-    color: white;
-    font-size: 150px;
-    line-height: 190px;
-    text-align: center;
-    border-radius: 10px;
+}
 
-
-  }*/
