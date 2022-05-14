@@ -7,6 +7,7 @@ import { DatePipe } from '@angular/common';
 import { CategoryService } from 'src/app/services/category-service/category.service';
 import { StatisticPerCategory } from 'src/app/models/StatisticPerCategory';
 import { Subscription } from 'rxjs';
+import { Category } from 'src/app/models/Category';
 
 
 @Component({
@@ -20,6 +21,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   statisticChangeSubscription: Subscription;
 
+  // gerneral information
+  categories: Category[] = [];
 
   public barChartOptions: ChartOptions = {
     responsive: true,
@@ -36,20 +39,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
   public barChartLegend = true;
   public barChartPlugins = [];
 
-  // public barChartData: ChartDataSets[] = [
-  //   { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
-  //   { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' },
-  //   { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series C' },
-  //   { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series D' },
-  //   { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series E' },
-  //   { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series F' }
-  // ];
   public barChartData: ChartDataSets[] = []
-  
-  // public lineChartData: ChartDataSets[] = [
-  //   { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A', lineTension:0 },
-  // ];category
-  public lineChartData: ChartDataSets[] = [ {data:[], label: 'Finished work units per day', lineTension:0}]
+ 
+  //public lineChartData: ChartDataSets[] = [ {data:[], label: 'Pomodoros', lineTension:0}]
+
+  lineChartData: ChartDataSets[] = [
+     {}
+  ];
   public lineChartLabels: Label[] = [];
   public lineChartOptions: (ChartOptions & { annotation: any }) = {
     responsive: true,
@@ -57,8 +53,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   };
   public lineChartColors: Color[] = [
     {
-      borderColor: 'black',
-      backgroundColor: 'rgba(255,0,0,0.3)',
+      backgroundColor: 'transparent',
     },
   ];
   public lineChartLegend = true;
@@ -93,47 +88,79 @@ export class DashboardComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.fillStaticVariables();
     this.statisticChangeSubscription = this.statisticService.statisticChanged$.subscribe(_ => {
-
       this.fillStaticVariables()
     });
   }
 
   private fillStaticVariables() {
-    this.lineChartData[0].data = [];
+    // this.lineChartData[0].data = [];
     this.lineChartLabels = [];
     this.barChartLabels = [];
     this.pieChartLabels = [];
     this.pieChartData = [];
     this.pieColors[0].backgroundColor = [];
+
+    this.categoryService.loadCategory().subscribe(res => {
+      this.lineChartData = [] // pop undefined label category
+      this.categories = []
+      res.forEach(category => {
+        this.lineChartData.push({ data: [], label: category.category, backgroundColor: 'transparent', borderColor: category.color })
+        this.categories.push(category)
+      })
+    })
+
     this.statisticService.loadStatistic(DAY_URL).subscribe(res => {
       res.forEach(day => {
-        this.lineChartData[0].data.push(day.sum);
-        this.lineChartLabels.push(this.datePipe.transform(day.date, 'dd.MM'));
-        this.barChartLabels.push(this.datePipe.transform(day.date, 'dd.MM'));
-      });
-      this.barChartData = [];
+        this.lineChartData.forEach(catCharData => {
+          var catId = this.categories.find(cat => cat.category == catCharData.label).id
+          var count = 0
+          if (day.statisticPerCategory.find(statPerCat => statPerCat.id == catId) != undefined)
+            count = day.statisticPerCategory.find(statPerCat => statPerCat.id == catId).count
+          catCharData.data.push(count)
+        })
 
-      this.categoryService.loadCategory().subscribe(catList => {
-
-        catList.forEach(category => {
-          const chartDataSets: ChartDataSets = { data: [], label: category.category, backgroundColor: category.color };
-          this.pieChartLabels.push(category.category);
-          var piCatCount = 0;
-          res.forEach(day => {
-            const statisticPerCategoryList: StatisticPerCategory[] = day.statisticPerCategory.filter(statPerDay => statPerDay.id == category.id);
-            if (statisticPerCategoryList.length > 0) {
-              chartDataSets.data.push(statisticPerCategoryList[0].count);
-              piCatCount += statisticPerCategoryList[0].count;
-            } else {
-              chartDataSets.data.push(0);
-            }
-          });
-          this.pieChartData.push(piCatCount);
-          this.pieColors[0].backgroundColor = [...this.pieColors[0].backgroundColor, category.color];
-          //(<string[]> this.pieColors[0].backgroundColor).push(category.color);
-          this.barChartData.push(chartDataSets);
-        });
+        // day.statisticPerCategory.forEach(catStats => {
+        //   catStats.count
+        //   //this.lineChartData.find((d) => d.)
+        // })
+        //   this.lineChartData[0].data.push(day.sum);
+        //   this.lineChartData[1].data.push(day.sum/2);
+        //   this.lineChartData[2].data.push(day.sum*2);
+          this.lineChartLabels.push(this.datePipe.transform(day.date, 'dd.MM'));
+          this.barChartLabels.push(this.datePipe.transform(day.date, 'dd.MM'));
       });
     });
+    // this.statisticService.loadStatistic(DAY_URL).subscribe(res => {
+    //    res.forEach(day => {
+    //        this.lineChartData[0].data.push(day.sum);
+    //        this.lineChartData[1].data.push(day.sum/2);
+    //        this.lineChartData[2].data.push(day.sum*2);
+    //        this.lineChartLabels.push(this.datePipe.transform(day.date, 'dd.MM'));
+    //        this.barChartLabels.push(this.datePipe.transform(day.date, 'dd.MM'));
+    //    });
+    //   this.barChartData = [];
+
+    //   this.categoryService.loadCategory().subscribe(catList => {
+
+    //     catList.forEach(category => {
+    //       const chartDataSets: ChartDataSets = { data: [], label: category.category, backgroundColor: category.color };
+    //       this.pieChartLabels.push(category.category);
+    //       var piCatCount = 0;
+    //       res.forEach(day => {
+    //         const statisticPerCategoryList: StatisticPerCategory[] = day.statisticPerCategory.filter(statPerDay => statPerDay.id == category.id);
+    //         if (statisticPerCategoryList.length > 0) {
+    //           chartDataSets.data.push(statisticPerCategoryList[0].count);
+    //           piCatCount += statisticPerCategoryList[0].count;
+    //         } else {
+    //           chartDataSets.data.push(0);
+    //         }
+    //       });
+    //       this.pieChartData.push(piCatCount);
+    //       this.pieColors[0].backgroundColor = [...this.pieColors[0].backgroundColor, category.color];
+    //       //(<string[]> this.pieColors[0].backgroundColor).push(category.color);
+    //       this.barChartData.push(chartDataSets);
+    //     });
+    //   });
+    // });
   }
 }
