@@ -10,12 +10,15 @@ var Config = require('node-json-db/dist/lib/JsonDBConfig.js').Config;
 
 var db = new JsonDB(new Config("myDataBase", true, true, '/')); //Pushing the data into the database
 
+const API_PATH = "/organizer/api"
+
 // db.push("/events[]")
 // db.push("/categories[]")
 // db.push("/statisticDays[]")
 // db.push("/timerConfiguration",{})
 //With the wanted DataPath
 //By default the push will override the old value
+//var cors = require('cors')
 
 const app = express();
 app.use((req, res, next) => {
@@ -26,6 +29,9 @@ app.use((req, res, next) => {
   next();
 }); // parse application/x-www-form-urlencoded
 
+
+//app.use(cors({credentials: true, origin: true}));
+
 app.use(bodyParser.urlencoded({
   extended: false
 })); // parse application/json
@@ -33,55 +39,55 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json()); //events
 
 const EVENTS = "/events";
-app.get('/api/events', (req, res) => {
+app.get(API_PATH + '/events', (req, res) => {
   return getAll(EVENTS, req, res);
 });
-app.get('/api/events/:id', (req, res) => {
+app.get(API_PATH + '/events/:id', (req, res) => {
   return getElementById(EVENTS, req, res);
 });
-app.delete('/api/events/:id', (req, res) => {
+app.delete(API_PATH + '/events/:id', (req, res) => {
   return deleteElementById(EVENTS, req, res);
 });
-app.put('/api/events/:id', (req, res) => {
+app.put(API_PATH + '/events/:id', (req, res) => {
   return updateElement(EVENTS, req, res);
 });
-app.post('/api/events/', (req, res) => {
+app.post(API_PATH + '/events/', (req, res) => {
   return saveNewElement(EVENTS, req, res);
 }); //category
 
 const CATEGORY = "/categories";
-app.get('/api/categories', (req, res) => {
+app.get(API_PATH + '/categories', (req, res) => {
   return getAll(CATEGORY, req, res);
 });
-app.get('/api/categories/:id', (req, res) => {
+app.get(API_PATH + '/categories/:id', (req, res) => {
   return getElementById(CATEGORY, req, res);
 });
-app.delete('/api/categories/:id', (req, res) => {
+app.delete(API_PATH + '/categories/:id', (req, res) => {
   return deleteElementById(CATEGORY, req, res);
 });
-app.put('/api/categories/:id', (req, res) => {
+app.put(API_PATH + '/categories/:id', (req, res) => {
   return updateElement(CATEGORY, req, res);
 });
-app.post('/api/categories/', (req, res) => {
+app.post(API_PATH + '/categories/', (req, res) => {
   return saveNewElement(CATEGORY, req, res);
 }); //timer-configuration
 
 const TIMERCONF = "/timerConfiguration";
-app.get('/api/timer-configuration', (req, res) => {
+app.get(API_PATH + '/timer-configuration', (req, res) => {
   return res.json(db.getData(TIMERCONF));
 });
-app.put('/api/timer-configuration', (req, res) => {
+app.put(API_PATH + '/timer-configuration', (req, res) => {
   db.push(TIMERCONF, req.body);
   return res.json(req.body);
 }); //statistic_day
 
 const DAY = "/statisticDays";
 
-app.get('/api/statistic_day/', (req, res) => {
+app.get(API_PATH + '/statistic_day/', (req, res) => {
   return getAll(DAY, req, res);
 });
 
-app.get('/api/statistic_day/:date', (req, res) => {
+app.get(API_PATH + '/statistic_day/:date', (req, res) => {
   console.log("DEBUG:", req.params)
   if (req.params.date == undefined || req.params.date == null) {
     return res.status(500).send({
@@ -95,10 +101,10 @@ app.get('/api/statistic_day/:date', (req, res) => {
   });
   return res.json(stat);
 });
-app.delete('/api/statistic_day/:id', (req, res) => {
+app.delete(API_PATH + '/statistic_day/:id', (req, res) => {
   return deleteElementById(DAY, req, res);
 });
-app.put('/api/statistic_day/:date', (req, res) => {
+app.put(API_PATH + '/statistic_day/:date', (req, res) => {
   if (req.body.date == undefined || req.body.date == null) {
     return res.status(500).send({
       error: 'Cant update element without date in put request'
@@ -108,10 +114,10 @@ app.put('/api/statistic_day/:date', (req, res) => {
   db.push(DAY + "[" + date + "]", req.body);
   return res.json(req.body);
 });
-app.post('/api/statistic_day/', (req, res) => {
+app.post(API_PATH + '/statistic_day/', (req, res) => {
   return saveNewElement(DAY, req, res);
 });
-app.listen(3200, () => console.log(`Example app listening on port ${3200}!`));
+
 
 function getElementById(path, req, res) {
   const event = db.find(path, (event, index) => {
@@ -179,15 +185,10 @@ function saveNewElement(path, req, res) {
   return res.json(req.body);
 }
 
-const appAngular = express();
-const port = 3100;
+const DIR = 'C:/Users/Stefan Hampejs/Documents/git';
+app.use(express.static(DIR + '/organizer/dist/stefan-organizer'));
+app.all('*', (req, res) => {
+  res.status(200).sendFile(DIR + '/organizer/dist/stefan-organizer/index.html');
+});
 
-const dir = 'C:/Users/Stefan Hampejs/Documents/git'
-//const dir = '/home/node/organizer';
-appAngular.use(express.static(dir + '/organizer'));
-appAngular.all('*', (req, res) => {
-  res.status(200).sendFile(dir + '/organizer/index.html');
-});
-appAngular.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
-});
+app.listen(3200, () => console.log(`Example app listening on port ${3200}!`));

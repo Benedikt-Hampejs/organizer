@@ -40,25 +40,38 @@ export class DashboardComponent implements OnInit, OnDestroy {
   public barChartPlugins = [];
 
   public barChartData: ChartDataSets[] = []
- 
-  //public lineChartData: ChartDataSets[] = [ {data:[], label: 'Pomodoros', lineTension:0}]
 
-  lineChartData: ChartDataSets[] = [
-     {}
-  ];
-  public lineChartLabels: Label[] = [];
-  public lineChartOptions: (ChartOptions & { annotation: any }) = {
+  public pomodoroChartData: ChartDataSets[] = [{}];
+  public pomodoroChartLabels: Label[] = [];
+  public pomodoroChartOptions: (ChartOptions & { annotation: any }) = {
     responsive: true,
     annotation: null
   };
-  public lineChartColors: Color[] = [
+  public pomodoroChartColors: Color[] = [
     {
       backgroundColor: 'transparent',
     },
   ];
-  public lineChartLegend = true;
-  public lineChartType = 'line';
-  public lineChartPlugins = [];
+  public pomodoroChartLegend = true;
+  public pomodoroChartType = 'line';
+  public pomodoroChartPlugins = [];
+
+  public taskChartData: ChartDataSets[] = [{}];
+  public taskChartLabels: Label[] = [];
+  public taskChartOptions: (ChartOptions & { annotation: any }) = {
+    responsive: true,
+    annotation: null
+  };
+  public taskChartColors: Color[] = [
+    {
+      backgroundColor: 'transparent',
+    },
+  ];
+  public taskChartLegend = true;
+  public taskChartType = 'line';
+  public taskChartPlugins = [];
+
+
 
   // Pie
   public pieChartOptions: ChartOptions = {
@@ -93,30 +106,41 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   private fillStaticVariables() {
-    // this.lineChartData[0].data = [];
-    this.lineChartLabels = [];
+    this.pomodoroChartLabels = [];
+    this.taskChartLabels = [];
     this.barChartLabels = [];
     this.pieChartLabels = [];
     this.pieChartData = [];
     this.pieColors[0].backgroundColor = [];
 
     this.categoryService.loadCategory().subscribe(res => {
-      this.lineChartData = [] // pop undefined label category
+      this.pomodoroChartData = [] 
+      this.taskChartData = []
       this.categories = []
       res.forEach(category => {
-        this.lineChartData.push({ data: [], label: category.category, backgroundColor: 'transparent', borderColor: category.color })
+        this.pomodoroChartData.push({ data: [], label: category.category, backgroundColor: 'transparent', borderColor: category.color })
+        this.taskChartData.push({ data: [], label: category.category, backgroundColor: 'transparent', borderColor: category.color })
         this.categories.push(category)
       })
-    })
+    
 
     this.statisticService.loadStatistic(DAY_URL).subscribe(res => {
       res.forEach(day => {
-        this.lineChartData.forEach(catCharData => {
+        this.pomodoroChartData.forEach(catCharData => {
           var catId = this.categories.find(cat => cat.category == catCharData.label).id
-          var count = 0
+          var countPomodoros = 0
+          if (day.statisticPerCategory.find(statPerCat => statPerCat.id == catId) != undefined) 
+            countPomodoros = day.statisticPerCategory.find(statPerCat => statPerCat.id == catId).pomodoro    
+          catCharData.data.push(countPomodoros)
+        })
+      
+
+        this.taskChartData.forEach(catCharData => {
+          var catId = this.categories.find(cat => cat.category == catCharData.label).id
+          var countTasks = 0
           if (day.statisticPerCategory.find(statPerCat => statPerCat.id == catId) != undefined)
-            count = day.statisticPerCategory.find(statPerCat => statPerCat.id == catId).count
-          catCharData.data.push(count)
+            countTasks =  day.statisticPerCategory.find(statPerCat => statPerCat.id == catId).tasks
+          catCharData.data.push(countTasks)
         })
 
         // day.statisticPerCategory.forEach(catStats => {
@@ -126,9 +150,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
         //   this.lineChartData[0].data.push(day.sum);
         //   this.lineChartData[1].data.push(day.sum/2);
         //   this.lineChartData[2].data.push(day.sum*2);
-          this.lineChartLabels.push(this.datePipe.transform(day.date, 'dd.MM'));
-          this.barChartLabels.push(this.datePipe.transform(day.date, 'dd.MM'));
-      });
+        this.pomodoroChartLabels.push(this.datePipe.transform(day.date, 'dd.MM'));
+        this.taskChartLabels.push(this.datePipe.transform(day.date, 'dd.MM'));
+          //this.barChartLabels.push(this.datePipe.transform(day.date, 'dd.MM'));
+        });
+      }) 
     });
     // this.statisticService.loadStatistic(DAY_URL).subscribe(res => {
     //    res.forEach(day => {

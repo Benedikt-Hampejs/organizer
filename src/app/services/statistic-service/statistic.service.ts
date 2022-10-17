@@ -5,6 +5,10 @@ import { Observable, Subject } from 'rxjs';
 import { tap } from 'rxjs/internal/operators';
 import { Statistic } from '../../models/Statistic'
 import { environment } from '../../../environments/environment';
+import { StatisticPerCategory } from 'src/app/models/StatisticPerCategory';
+import { StatisticsEnum } from 'src/app/enums/StatisticsEnum';
+import { Event } from '../../models/Event';
+import { state } from '@angular/animations';
 
 
 export const DAY_URL = environment.apiURL + 'statistic_day/';
@@ -21,11 +25,6 @@ export class StatisticService {
   constructor(private http: HttpClient, private datePipe: DatePipe) { }
 
   getStatistic(date: Date, url: string): Observable<Statistic> {
-
-    // let param = new HttpParams;
-    // if (date != null) {
-    //   param = param.append('date', this.datePipe.transform(date, 'yyyy-MM-dd') + 'T00:00:00.000Z');
-    // }
     const statDate = this.datePipe.transform(date, 'yyyy-MM-dd') + 'T00:00:00.000Z'
     return this.http.get<Statistic>(url + statDate);
   }
@@ -35,14 +34,58 @@ export class StatisticService {
   }
 
   saveStatistic(statistic: Statistic, url: string) {
-    console.log("saveStatistic",statistic)
-    const method = statistic.sum == 1 ? 'POST' : 'PUT';
-    const date = statistic.sum == 1 ?  '' : this.datePipe.transform(statistic.date, 'yyyy-MM-dd') + 'T00:00:00.000Z';
+    console.log(statistic.sumPomodoros, statistic.sumTasks)
+    const method = (statistic.sumPomodoros + statistic.sumTasks) == 1 ? 'POST' : 'PUT';
+    const date = (statistic.sumPomodoros + statistic.sumTasks) == 1 ?  '' : this.datePipe.transform(statistic.date, 'yyyy-MM-dd') + 'T00:00:00.000Z';
     return this.http.request(method, url + date, {
       body: statistic
     }).pipe(
       tap(savedStatistic=> {
         this.statisticChanged$.next(savedStatistic)
       }));
+  }
+
+  updateStatistic(event: Event, statisticEnum: StatisticsEnum) {
+    const today = new Date()
+    this.getStatistic(today, DAY_URL).subscribe(res => {
+      var statOfToday: Statistic = res;
+      if (statOfToday == undefined || statOfToday == null) statOfToday = {}
+      if (statOfToday.sumPomodoros == undefined) statOfToday.sumPomodoros = 0;
+      if (statOfToday.sumTasks == undefined) statOfToday.sumTasks = 0;
+    
+      if (statOfToday.date == undefined) {
+        statOfToday.date = new Date();
+        statOfToday.date.setSeconds(0);
+        statOfToday.date.setMinutes(0);
+        statOfToday.date.setUTCHours(0);
+        statOfToday.date.setUTCMilliseconds(0);
+      } 
+
+      if (statOfToday.statisticPerCategory == undefined) statOfToday.statisticPerCategory = []
+
+      const catStatArray = statOfToday.statisticPerCategory.filter(s => s.id == event.category);
+      var statCategory: StatisticPerCategory;
+      if (catStatArray.length != 0) {
+        //there are categories
+        statCategory = catStatArray[0];
+      } else {
+        statCategory = {id: event.category, pomodoro: 0, tasks: 0};
+        statOfToday.statisticPerCategory.push(statCategory);
+      } 
+
+      if (statisticEnum == StatisticsEnum.POMODORO) {
+        statCategory.pomodoro++;
+        statOfToday.sumPomodoros++;
+      }
+      if (statisticEnum == StatisticsEnum.TASK_UP) {
+        statCategory.tasks++;
+        statOfToday.sumTasks++;
+      }
+      if (statisticEnum == StatisticsEnum.TASK_DOWN) {
+        statCategory.tasks--;
+        statOfToday.sumTasks--;
+      }
+      this.saveStatistic(statOfToday, DAY_URL).subscribe()
+    })
   }
 }

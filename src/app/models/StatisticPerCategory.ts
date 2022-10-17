@@ -1,4 +1,5 @@
 export interface StatisticPerCategory {
     id?: number, 
-    count?: number
+    pomodoro?: number,
+    tasks?: number
 }

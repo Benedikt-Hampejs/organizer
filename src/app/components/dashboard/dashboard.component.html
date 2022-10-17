@@ -2,17 +2,30 @@
 <div class="row">
     
     <div class="col-lg-6">
-        <h2>Linechart</h2> 
+        <h2>Pomodoros</h2> 
         <canvas baseChart
-        [datasets]="lineChartData"
-        [labels]="lineChartLabels"
-        [options]="lineChartOptions"
-        [colors]="lineChartColors"
-        [legend]="lineChartLegend"
-        [chartType]="lineChartType"
-        [plugins]="lineChartPlugins">
+        [datasets]="pomodoroChartData"
+        [labels]="pomodoroChartLabels"
+        [options]="pomodoroChartOptions"
+        [colors]="pomodoroChartColors"
+        [legend]="pomodoroChartLegend"
+        [chartType]="pomodoroChartType"
+        [plugins]="pomodoroChartPlugins">
       </canvas>
     </div>
+
+    <div class="col-lg-6">
+      <h2>Tasks</h2> 
+      <canvas baseChart
+      [datasets]="taskChartData"
+      [labels]="taskChartLabels"
+      [options]="taskChartOptions"
+      [colors]="taskChartColors"
+      [legend]="taskChartLegend"
+      [chartType]="taskChartType"
+      [plugins]="taskChartPlugins">
+    </canvas>
+  </div>
     <!-- <div class="col-lg-6">
         <h2>Piechart</h2> 
         <canvas baseChart       

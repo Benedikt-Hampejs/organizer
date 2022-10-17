@@ -47,6 +47,8 @@ import { CategoryService } from './services/category-service/category.service';
 import { TimerService } from './services/timer-service/timer.service';
 import { StatisticService } from './services/statistic-service/statistic.service';
 
+// Utils
+import { StatisticUtils } from './utils/statistic-utils';
 
 
 @NgModule({
@@ -89,7 +91,7 @@ import { StatisticService } from './services/statistic-service/statistic.service
     MatSelectModule,
     CountdownModule
   ],
-  providers: [EventService, CategoryService, DatePipe, TimerService,StatisticService,
+  providers: [EventService, CategoryService, DatePipe, TimerService,StatisticService, StatisticUtils,
     {provide: MAT_DATE_LOCALE, useValue: 'de-DE'},
     {provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: {useUtc: true}}
   ],

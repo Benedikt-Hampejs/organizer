@@ -1,16 +1,46 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-lg-4">
+    <div class="col-lg-12">
       <h1>To do</h1>
 
       <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="todo" [cdkDropListConnectedTo]="[doneList]"
         class="example-list" (cdkDropListDropped)="drop($event)">
-        <div class="example-box" *ngFor="let item of todo" cdkDrag (click)="showEvent(item)"
-          [ngStyle]="{'background': getColorByEvent(item.category)+30}">{{item.title}}</div>
+        <div [ngStyle]="{'background': getColorByEvent(item.category)+30}" class="example-box" *ngFor="let item of todo" cdkDrag (click)="showEvent(item)">
+          
+          
+            <div *ngIf="item!=clickedEvent" style="display: inline;">
+              <div class="col-5">{{item.title}}</div>
+            </div>
+            <div *ngIf="item==clickedEvent">
+              <div class="row">
+                <div class="col-12"><b>Title: </b>{{item.title}}</div>
+              </div>
+              <div class="row">
+                <hr class="col-12" style="background-color: black;"/>
+              </div>
+              <div class="row">
+                <div class="col-12"><b>Description: </b></div>
+              </div>
+              <div class="row show-white-space">
+                <div class="col-12">{{item.description}}</div>
+              </div>
+              <div class="row">
+                <hr class="col-12" style="background-color: black;"/>
+              </div>
+              <div class="row">
+                <div class="col-12"> 
+                  <div class="mat-icon" style="display: inline; cursor: pointer" (click)="editEvent(item)"><mat-icon >edit</mat-icon></div>
+                  <div class="mat-icon" style="display: inline; cursor: pointer" (click)="deleteEvent(item)"><mat-icon >close</mat-icon></div>
+                </div>
+              </div>
+              
+            </div>
+        </div>
+        
       </div>
     </div>
 
-    <div class="col-lg-4">
+    <div class="col-lg-12">
       <h1>Done</h1>
 
       <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="done" [cdkDropListConnectedTo]="[todoList]"
@@ -19,8 +49,6 @@
           [ngStyle]="{'background': getColorByEvent(item.category)+30}">{{item.title}}</div>
       </div>
     </div>
-    <div class="col-lg-4">
-      <app-event-detail *ngIf="showEventDetail" [event]='clickedEvent'></app-event-detail>
-    </div>
+    
   </div>
 </div>

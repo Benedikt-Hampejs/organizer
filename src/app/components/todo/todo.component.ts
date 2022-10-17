@@ -6,7 +6,12 @@ import { Event } from 'src/app/models/Event';
 import { calculatePriortyByDay } from '../../helper'
 import { ActivatedRoute } from '@angular/router';
 import { CategoryService } from '../../services/category-service/category.service';
+import { StatisticService, DAY_URL } from '../../services/statistic-service/statistic.service';
 import { Category } from '../../models/Category';
+import { StatisticsEnum } from 'src/app/enums/StatisticsEnum';
+import { Router } from '@angular/router';
+import * as moment from 'moment';
+
 
 
 @Component({
@@ -19,13 +24,15 @@ export class TodoComponent implements OnInit {
   events$: Observable<Event[]>;
   categories: Category[] = [];
 
-  showEventDetail: boolean = false;
   clickedEvent: Event;
   todo: Event[] = [];
-
   done: Event[] = [];
 
-  constructor(private eventService: EventService, private categoryService: CategoryService, private activeRoute: ActivatedRoute) { }
+  constructor(private eventService: EventService, 
+    private categoryService: CategoryService, 
+    private activeRoute: ActivatedRoute, 
+    private statisticService: StatisticService, 
+    private router: Router ) { }
 
   ngOnInit(): void {
 
@@ -86,7 +93,15 @@ export class TodoComponent implements OnInit {
       const currentItem: Event = event.container.data[event.currentIndex];
       this.updateDone(event, currentItem);
       this.eventService.updateEventDone(currentItem);
-
+    
+      // add or remove points for finishing / reactivate task
+      const container_id_numbder = +event.container.id.replace("cdk-drop-list-","")
+      if (container_id_numbder % 2 == 0) { // %2 == 0 => left container
+        this.statisticService.updateStatistic(currentItem, StatisticsEnum.TASK_DOWN)
+      }
+        
+      if (container_id_numbder % 2 == 1) // %2 == 1 => right container
+        this.statisticService.updateStatistic(currentItem, StatisticsEnum.TASK_UP)
     }
     event.container.data.forEach(e => {
       e.priroty = calculatePriortyByDay(new Date()) + event.container.data.indexOf(e);
@@ -99,13 +114,23 @@ export class TodoComponent implements OnInit {
   }
 
   showEvent(event: Event) {
-    if (!this.showEventDetail || this.clickedEvent.id !== event.id) {
-      this.showEventDetail = true;
-    } else {
-      this.showEventDetail = false;
-    }
-    this.clickedEvent = event;
+    if (this.clickedEvent == null || this.clickedEvent.id !== event.id)
+      this.clickedEvent = event;
+    else
+      this.clickedEvent = null;
   }
+
+  editEvent(event: Event) {
+    let dayOfDate = (moment(event.start).format('YYYY-MM-DD'))
+    this.router.navigate(["../calender/day/"+dayOfDate])
+  }
+
+  deleteEvent(event: Event) {
+    this.eventService.deleteEvent(event).subscribe();
+    this.todo = this.todo.filter(elem => elem != event)
+  }
+
+  
 
   getColorByEvent(category: number): String {
     if (category == undefined || this.categories == undefined) {
@@ -118,5 +143,4 @@ export class TodoComponent implements OnInit {
         return '#3f51b5';
       }
   }
-
 }

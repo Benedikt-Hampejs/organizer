@@ -8,6 +8,7 @@ import { TimerService } from 'src/app/services/timer-service/timer.service';
 import { Event } from '../../models/Event';
 import { StatisticPerCategory } from 'src/app/models/StatisticPerCategory';
 import { Statistic } from 'src/app/models/Statistic';
+import { StatisticsEnum } from 'src/app/enums/StatisticsEnum';
 
 @Component({
   selector: 'app-timer',
@@ -64,6 +65,7 @@ export class TimerComponent implements OnInit {
     }
 
     if (e.action == "done") {
+      console.log("test - done")
       this.playAudio();
       this.updateStatistic()
       this.nextState();
@@ -86,7 +88,7 @@ export class TimerComponent implements OnInit {
     audio.play();
   }
 
-  updateStatistic() {
+   updateStatistic() {
     if (this.getCountdown().description != "work") return;
 
     var event: Event;
@@ -94,44 +96,10 @@ export class TimerComponent implements OnInit {
     this.eventService.loadEvents(null).subscribe(res => {
       res = res.filter(a => !a.done).filter(a => new Date(a.start) < today);
       res = res.sort((a,b) => a.priroty - b.priroty);
-      event = res[0]
+      event = res[0];
 
-      this.statisticService.getStatistic(today,DAY_URL).subscribe(stat => {
-        var statOfToday: Statistic = stat;
-        if (statOfToday == undefined || statOfToday == null) statOfToday = {}
-        if (statOfToday.sum == undefined) statOfToday.sum = 0;
-        statOfToday.sum++;
-
-        if (statOfToday.date == undefined) {
-          statOfToday.date = new Date();
-          statOfToday.date.setSeconds(0);
-          statOfToday.date.setMinutes(0);
-          statOfToday.date.setUTCHours(0);
-          statOfToday.date.setUTCMilliseconds(0);
-        } 
-
-
-        if (statOfToday.statisticPerCategory == undefined) statOfToday.statisticPerCategory = []
-        const catStatArray = statOfToday.statisticPerCategory.filter(s => s.id == event.category);
-        var statCategory: StatisticPerCategory;
-        if (catStatArray.length != 0) {
-          //there are categories
-          statCategory = catStatArray[0];
-        }
-        if (catStatArray.length == 0) {
-          statCategory = {id: event.category, count: 0};
-          statOfToday.statisticPerCategory.push(statCategory);
-        } 
-        statCategory.count++;
-
-        this.statisticService.saveStatistic(statOfToday, DAY_URL).subscribe();
-
-      });
+      this.statisticService.updateStatistic(event, StatisticsEnum.POMODORO);
     });
-    //if (e == undefined) 
-    
-
-    
   }
 
   nextState() {
